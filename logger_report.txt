@@ -1,0 +1,2 @@
+2026-08-07 [ERROR] test failure sample
+2026-08-08 02:26:03 [ERROR] [tid=0] [SUBSCRIBER::subdb_load_csv:903] load_csv: cannot open 'data/subscribers.csv': No such file or directory

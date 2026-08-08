@@ -1,0 +1,32 @@
+==758== Helgrind, a thread error detector
+==758== Copyright (C) 2007-2024, and GNU GPL'd, by OpenWorks LLP et al.
+==758== Using Valgrind-3.26.0 and LibVEX; rerun with -h for copyright info
+==758== Command: ./subscriber_mgmt
+==758== 
+[auth] created initial user 'admin' (role=ADMIN) password: Ap39wb6301@@
+[auth] created initial user 'operator' (role=OPERATOR) password: 2baa2ab1cb64ede75f
+[auth] created initial user 'viewer' (role=VIEWER) password: 7cdc40c68e52beb8a8
+
+========== Telecom Subscriber Management ==========
+ 1. Login
+ 2. Add Subscriber
+ 3. Search Subscriber
+ 4. Update Subscriber
+ 5. Delete Subscriber
+ 6. Display All Subscribers
+ 7. Generate Reports
+ 8. Backup Subscriber Data
+ 9. Restore Subscriber Data
+10. View System Logs
+11. Memory Usage Statistics
+12. Shared String Statistics
+13. Change Password
+14. Logout
+15. Exit
+=====================================================
+Enter your choice: Exiting. Goodbye.
+==758== 
+==758== Use --history-level=approx or =none to gain increased speed, at
+==758== the cost of reduced accuracy of conflicting-access information
+==758== For lists of detected and suppressed errors, rerun with: -s
+==758== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
