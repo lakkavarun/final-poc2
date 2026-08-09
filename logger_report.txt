@@ -1,2 +1,6 @@
 2026-08-07 [ERROR] test failure sample
 2026-08-08 02:26:03 [ERROR] [tid=0] [SUBSCRIBER::subdb_load_csv:903] load_csv: cannot open 'data/subscribers.csv': No such file or directory
+2026-08-09 01:47:53 [ERROR] [tid=0] [SUBSCRIBER::subdb_save_csv:837] save_csv: cannot open temp file 'data/backups/subscribers_20260809_014753.csv.tmp': No such file or directory
+2026-08-09 01:47:53 [INFO ] [tid=0] [MAIN::action_backup:419] user 'admin' triggered a backup (status=IO_ERROR)
+2026-08-09 01:48:44 [ERROR] [tid=0] [SUBSCRIBER::subdb_save_csv:837] save_csv: cannot open temp file 'data/backups/subscribers_20260809_014844.csv.tmp': No such file or directory
+2026-08-09 01:48:44 [INFO ] [tid=0] [MAIN::action_backup:419] user 'admin' triggered a backup (status=IO_ERROR)
