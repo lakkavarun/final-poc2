@@ -304,10 +304,10 @@ sm_status_t subdb_add(sm_subscriber_db_t *db, const char *imsi, const char *msis
         return SM_ERR_ALLOC_FAILED;
     }
 
-    (void)strncpy(s->imsi, imsi, SM_MAX_IMSI_LEN);
-    s->imsi[SM_MAX_IMSI_LEN] = '\0';
-    (void)strncpy(s->msisdn, msisdn, SM_MAX_MSISDN_LEN);
-    s->msisdn[SM_MAX_MSISDN_LEN] = '\0';
+    (void)strncpy(s->imsi, imsi, sizeof(s->imsi) - 1U);
+    s->imsi[sizeof(s->imsi) - 1U] = '\0';
+    (void)strncpy(s->msisdn, msisdn, sizeof(s->msisdn) - 1U);
+    s->msisdn[sizeof(s->msisdn) - 1U] = '\0';
 
     sm_status_t st = sstr_intern(name, &s->name);
     if (st == SM_OK) st = sstr_intern(region, &s->region);
@@ -613,8 +613,8 @@ sm_status_t subdb_search_by_region(sm_subscriber_db_t *db, const char *region,
     }
     named_filter_ctx_t nctx = {0};
     nctx.ctx.ok = true;
-    (void)strncpy(nctx.needle, region, SM_MAX_NAME_LEN);
-    nctx.needle[SM_MAX_NAME_LEN] = '\0';
+    (void)strncpy(nctx.needle, region, sizeof(nctx.needle) - 1U);
+    nctx.needle[sizeof(nctx.needle) - 1U] = '\0';
 
     (void)sm_rwlock_rdlock(&db->lock);
     ht_iterate(db->by_id, region_match_cb, &nctx);
@@ -637,8 +637,8 @@ sm_status_t subdb_search_by_plan(sm_subscriber_db_t *db, const char *plan,
     }
     named_filter_ctx_t nctx = {0};
     nctx.ctx.ok = true;
-    (void)strncpy(nctx.needle, plan, SM_MAX_NAME_LEN);
-    nctx.needle[SM_MAX_NAME_LEN] = '\0';
+    (void)strncpy(nctx.needle, plan, sizeof(nctx.needle) - 1U);
+    nctx.needle[sizeof(nctx.needle) - 1U] = '\0';
 
     (void)sm_rwlock_rdlock(&db->lock);
     ht_iterate(db->by_id, plan_match_cb, &nctx);

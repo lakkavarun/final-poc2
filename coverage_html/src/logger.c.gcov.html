@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-11 01:06:52</td>
+            <td class="headerValue">2026-08-11 16:17:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -78,145 +78,145 @@
 <span id="L16"><span class="lineNum">      16</span>              : static sm_mutex_t   g_lock          = SM_MUTEX_INITIALIZER;</span>
 <span id="L17"><span class="lineNum">      17</span>              : static bool              g_initialized   = false;</span>
 <span id="L18"><span class="lineNum">      18</span>              : </span>
-<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">          17 : static const char *level_name(sm_log_level_t l)</span></span>
+<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">         119 : static const char *level_name(sm_log_level_t l)</span></span>
 <span id="L20"><span class="lineNum">      20</span>              : {</span>
-<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC">          17 :     switch (l) {</span></span>
-<span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC">           1 :         case LOG_DEBUG:   return &quot;DEBUG&quot;;</span></span>
-<span id="L23"><span class="lineNum">      23</span> <span class="tlaGNC">          12 :         case LOG_INFO:    return &quot;INFO&quot;;</span></span>
-<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC">           1 :         case LOG_WARNING: return &quot;WARN&quot;;</span></span>
-<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">           1 :         case LOG_ERROR:   return &quot;ERROR&quot;;</span></span>
-<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">           1 :         case LOG_FATAL:   return &quot;FATAL&quot;;</span></span>
-<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           1 :         default:          return &quot;UNKNOWN&quot;;</span></span>
+<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC">         119 :     switch (l) {</span></span>
+<span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC">           7 :         case LOG_DEBUG:   return &quot;DEBUG&quot;;</span></span>
+<span id="L23"><span class="lineNum">      23</span> <span class="tlaGNC">          84 :         case LOG_INFO:    return &quot;INFO&quot;;</span></span>
+<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC">           7 :         case LOG_WARNING: return &quot;WARN&quot;;</span></span>
+<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">           7 :         case LOG_ERROR:   return &quot;ERROR&quot;;</span></span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">           7 :         case LOG_FATAL:   return &quot;FATAL&quot;;</span></span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           7 :         default:          return &quot;UNKNOWN&quot;;</span></span>
 <span id="L28"><span class="lineNum">      28</span>              :     }</span>
 <span id="L29"><span class="lineNum">      29</span>              : }</span>
 <span id="L30"><span class="lineNum">      30</span>              : </span>
-<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">          14 : const char *sm_status_str(sm_status_t st)</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">          98 : const char *sm_status_str(sm_status_t st)</span></span>
 <span id="L32"><span class="lineNum">      32</span>              : {</span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">          14 :     switch (st) {</span></span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           1 :         case SM_OK:               return &quot;OK&quot;;</span></span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           1 :         case SM_ERR_NULL_PARAM:   return &quot;NULL_PARAM&quot;;</span></span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           1 :         case SM_ERR_ALLOC_FAILED: return &quot;ALLOC_FAILED&quot;;</span></span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">           1 :         case SM_ERR_NOT_FOUND:    return &quot;NOT_FOUND&quot;;</span></span>
-<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">           3 :         case SM_ERR_DUPLICATE:    return &quot;DUPLICATE&quot;;</span></span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">           1 :         case SM_ERR_INVALID_ARG:  return &quot;INVALID_ARG&quot;;</span></span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           1 :         case SM_ERR_IO:           return &quot;IO_ERROR&quot;;</span></span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">           1 :         case SM_ERR_CORRUPT_DATA: return &quot;CORRUPT_DATA&quot;;</span></span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">           1 :         case SM_ERR_LOCK_FAILED:  return &quot;LOCK_FAILED&quot;;</span></span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           1 :         case SM_ERR_CAPACITY:     return &quot;CAPACITY&quot;;</span></span>
-<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">           1 :         case SM_ERR_UNAUTHORIZED: return &quot;UNAUTHORIZED&quot;;</span></span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">           1 :         default:                  return &quot;INTERNAL_ERROR&quot;;</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">          98 :     switch (st) {</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           7 :         case SM_OK:               return &quot;OK&quot;;</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           7 :         case SM_ERR_NULL_PARAM:   return &quot;NULL_PARAM&quot;;</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           7 :         case SM_ERR_ALLOC_FAILED: return &quot;ALLOC_FAILED&quot;;</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">           7 :         case SM_ERR_NOT_FOUND:    return &quot;NOT_FOUND&quot;;</span></span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">          21 :         case SM_ERR_DUPLICATE:    return &quot;DUPLICATE&quot;;</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">           7 :         case SM_ERR_INVALID_ARG:  return &quot;INVALID_ARG&quot;;</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           7 :         case SM_ERR_IO:           return &quot;IO_ERROR&quot;;</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">           7 :         case SM_ERR_CORRUPT_DATA: return &quot;CORRUPT_DATA&quot;;</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">           7 :         case SM_ERR_LOCK_FAILED:  return &quot;LOCK_FAILED&quot;;</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           7 :         case SM_ERR_CAPACITY:     return &quot;CAPACITY&quot;;</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">           7 :         case SM_ERR_UNAUTHORIZED: return &quot;UNAUTHORIZED&quot;;</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">           7 :         default:                  return &quot;INTERNAL_ERROR&quot;;</span></span>
 <span id="L46"><span class="lineNum">      46</span>              :     }</span>
 <span id="L47"><span class="lineNum">      47</span>              : }</span>
 <span id="L48"><span class="lineNum">      48</span>              : </span>
 <span id="L49"><span class="lineNum">      49</span>              : /* Single-threaded, portable build: there is exactly one thread of</span>
 <span id="L50"><span class="lineNum">      50</span>              :  * execution, so an execution-id is always 0. Kept as a function (rather</span>
 <span id="L51"><span class="lineNum">      51</span>              :  * than deleted) so the log line format and call sites stay unchanged. */</span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">          17 : static long get_tid(void)</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">         119 : static long get_tid(void)</span></span>
 <span id="L53"><span class="lineNum">      53</span>              : {</span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">          17 :     return 0L;</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">         119 :     return 0L;</span></span>
 <span id="L55"><span class="lineNum">      55</span>              : }</span>
 <span id="L56"><span class="lineNum">      56</span>              : </span>
 <span id="L57"><span class="lineNum">      57</span>              : /* Rotate the current log file to &lt;path&gt;.1 if it exceeds g_rotate_max bytes.</span>
 <span id="L58"><span class="lineNum">      58</span>              :  * Caller must hold g_lock. */</span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">          17 : static void maybe_rotate(void)</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">         119 : static void maybe_rotate(void)</span></span>
 <span id="L60"><span class="lineNum">      60</span>              : {</span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">          17 :     if (g_rotate_max == 0U || g_fp == NULL || g_path[0] == '\0') {</span></span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">           8 :         return;</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">         119 :     if (g_rotate_max == 0U || g_fp == NULL || g_path[0] == '\0') {</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">          56 :         return;</span></span>
 <span id="L63"><span class="lineNum">      63</span>              :     }</span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">          10 :     long pos = ftell(g_fp);</span></span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          10 :     if (pos &lt; 0 || (size_t)pos &lt; g_rotate_max) {</span></span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">           1 :         return;</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">          70 :     long pos = ftell(g_fp);</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          70 :     if (pos &lt; 0 || (size_t)pos &lt; g_rotate_max) {</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">           7 :         return;</span></span>
 <span id="L67"><span class="lineNum">      67</span>              :     }</span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">           9 :     fflush(g_fp);</span></span>
-<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">           9 :     fclose(g_fp);</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">          63 :     fflush(g_fp);</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">          63 :     fclose(g_fp);</span></span>
 <span id="L70"><span class="lineNum">      70</span>              : </span>
 <span id="L71"><span class="lineNum">      71</span>              :     char backup[600];</span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">           9 :     (void)snprintf(backup, sizeof(backup), &quot;%s.1&quot;, g_path);</span></span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">           9 :     (void)rename(g_path, backup); /* best-effort; ignore failure */</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">          63 :     (void)snprintf(backup, sizeof(backup), &quot;%s.1&quot;, g_path);</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">          63 :     (void)rename(g_path, backup); /* best-effort; ignore failure */</span></span>
 <span id="L74"><span class="lineNum">      74</span>              : </span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">           9 :     g_fp = fopen(g_path, &quot;a&quot;);</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">          63 :     g_fp = fopen(g_path, &quot;a&quot;);</span></span>
 <span id="L76"><span class="lineNum">      76</span>              :     /* If reopening the file fails, later logging will fall back to stderr. */</span>
 <span id="L77"><span class="lineNum">      77</span>              : }</span>
 <span id="L78"><span class="lineNum">      78</span>              : </span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">           7 : sm_status_t logger_init(const char *path, sm_log_level_t min_level, size_t rotate_max_bytes)</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">          49 : sm_status_t logger_init(const char *path, sm_log_level_t min_level, size_t rotate_max_bytes)</span></span>
 <span id="L80"><span class="lineNum">      80</span>              : {</span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">           7 :     if (sm_mutex_lock(&amp;g_lock) != 0) {</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">          49 :     if (sm_mutex_lock(&amp;g_lock) != 0) {</span></span>
 <span id="L82"><span class="lineNum">      82</span> <span class="tlaUNC">           0 :         return SM_ERR_LOCK_FAILED;</span></span>
 <span id="L83"><span class="lineNum">      83</span>              :     }</span>
-<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">           7 :     g_min_level  = min_level;</span></span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">           7 :     g_rotate_max = rotate_max_bytes;</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">          49 :     g_min_level  = min_level;</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">          49 :     g_rotate_max = rotate_max_bytes;</span></span>
 <span id="L86"><span class="lineNum">      86</span>              : </span>
-<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">           7 :     if (path != NULL) {</span></span>
-<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">           3 :         (void)strncpy(g_path, path, sizeof(g_path) - 1U);</span></span>
-<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">           3 :         g_path[sizeof(g_path) - 1U] = '\0';</span></span>
-<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">           3 :         g_fp = fopen(path, &quot;a&quot;);</span></span>
-<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">           3 :         if (g_fp == NULL) {</span></span>
-<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">           1 :             (void)sm_mutex_unlock(&amp;g_lock);</span></span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">           1 :             return SM_ERR_IO;</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">          49 :     if (path != NULL) {</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">          21 :         (void)strncpy(g_path, path, sizeof(g_path) - 1U);</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">          21 :         g_path[sizeof(g_path) - 1U] = '\0';</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">          21 :         g_fp = fopen(path, &quot;a&quot;);</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">          21 :         if (g_fp == NULL) {</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">           7 :             (void)sm_mutex_unlock(&amp;g_lock);</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">           7 :             return SM_ERR_IO;</span></span>
 <span id="L94"><span class="lineNum">      94</span>              :         }</span>
 <span id="L95"><span class="lineNum">      95</span>              :     } else {</span>
-<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">           4 :         g_fp = NULL; /* stderr only */</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">          28 :         g_fp = NULL; /* stderr only */</span></span>
 <span id="L97"><span class="lineNum">      97</span>              :     }</span>
-<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">           6 :     g_initialized = true;</span></span>
-<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">           6 :     (void)sm_mutex_unlock(&amp;g_lock);</span></span>
-<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">           6 :     return SM_OK;</span></span>
+<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">          42 :     g_initialized = true;</span></span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">          42 :     (void)sm_mutex_unlock(&amp;g_lock);</span></span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">          42 :     return SM_OK;</span></span>
 <span id="L101"><span class="lineNum">     101</span>              : }</span>
 <span id="L102"><span class="lineNum">     102</span>              : </span>
-<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">           6 : void logger_shutdown(void)</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">          42 : void logger_shutdown(void)</span></span>
 <span id="L104"><span class="lineNum">     104</span>              : {</span>
-<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">           6 :     (void)sm_mutex_lock(&amp;g_lock);</span></span>
-<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">           6 :     if (g_fp != NULL) {</span></span>
-<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">           2 :         fflush(g_fp);</span></span>
-<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">           2 :         fclose(g_fp);</span></span>
-<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">           2 :         g_fp = NULL;</span></span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">          42 :     (void)sm_mutex_lock(&amp;g_lock);</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">          42 :     if (g_fp != NULL) {</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">          14 :         fflush(g_fp);</span></span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">          14 :         fclose(g_fp);</span></span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">          14 :         g_fp = NULL;</span></span>
 <span id="L110"><span class="lineNum">     110</span>              :     }</span>
-<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">           6 :     g_initialized = false;</span></span>
-<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">           6 :     (void)sm_mutex_unlock(&amp;g_lock);</span></span>
-<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">           6 : }</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">          42 :     g_initialized = false;</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">          42 :     (void)sm_mutex_unlock(&amp;g_lock);</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">          42 : }</span></span>
 <span id="L114"><span class="lineNum">     114</span>              : </span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">        8947 : void logger_log(sm_log_level_t level, const char *module, const char *func,</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">       62704 : void logger_log(sm_log_level_t level, const char *module, const char *func,</span></span>
 <span id="L116"><span class="lineNum">     116</span>              :                  int line, const char *fmt, ...)</span>
 <span id="L117"><span class="lineNum">     117</span>              : {</span>
-<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">        8947 :     if (level &lt; g_min_level) {</span></span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">        8930 :         return;</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">       62704 :     if (level &lt; g_min_level) {</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">       62599 :         return;</span></span>
 <span id="L120"><span class="lineNum">     120</span>              :     }</span>
 <span id="L121"><span class="lineNum">     121</span>              :     char timebuf[32];</span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">          17 :     time_t now = time(NULL);</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">         105 :     time_t now = time(NULL);</span></span>
 <span id="L123"><span class="lineNum">     123</span>              :     /* gmtime() returns a pointer into a static, process-wide buffer that is</span>
 <span id="L124"><span class="lineNum">     124</span>              :      * NOT thread-safe -- concurrent callers can race on it and corrupt each</span>
 <span id="L125"><span class="lineNum">     125</span>              :      * other's timestamp. gmtime_r() writes into a caller-owned struct tm</span>
 <span id="L126"><span class="lineNum">     126</span>              :      * instead, so each thread gets its own storage. Same output format,</span>
 <span id="L127"><span class="lineNum">     127</span>              :      * just safe under real concurrent callers. */</span>
 <span id="L128"><span class="lineNum">     128</span>              :     struct tm tm_storage;</span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">          17 :     const struct tm *tm_info = gmtime_r(&amp;now, &amp;tm_storage);</span></span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">          17 :     if (tm_info != NULL) {</span></span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">          17 :         (void)strftime(timebuf, sizeof(timebuf), &quot;%Y-%m-%d %H:%M:%S&quot;, tm_info);</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">         119 :     const struct tm *tm_info = gmtime_r(&amp;now, &amp;tm_storage);</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">         119 :     if (tm_info != NULL) {</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">         119 :         (void)strftime(timebuf, sizeof(timebuf), &quot;%Y-%m-%d %H:%M:%S&quot;, tm_info);</span></span>
 <span id="L132"><span class="lineNum">     132</span>              :     } else {</span>
 <span id="L133"><span class="lineNum">     133</span> <span class="tlaUNC">           0 :         (void)snprintf(timebuf, sizeof(timebuf), &quot;unknown-time&quot;);</span></span>
 <span id="L134"><span class="lineNum">     134</span>              :     }</span>
 <span id="L135"><span class="lineNum">     135</span>              : </span>
 <span id="L136"><span class="lineNum">     136</span>              :     char msg[1024];</span>
 <span id="L137"><span class="lineNum">     137</span>              :     va_list args;</span>
-<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">          17 :     va_start(args, fmt);</span></span>
-<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">          17 :     (void)vsnprintf(msg, sizeof(msg), fmt, args);</span></span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">          17 :     va_end(args);</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">         119 :     va_start(args, fmt);</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">         119 :     (void)vsnprintf(msg, sizeof(msg), fmt, args);</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">         119 :     va_end(args);</span></span>
 <span id="L141"><span class="lineNum">     141</span>              : </span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">          17 :     if (sm_mutex_lock(&amp;g_lock) != 0) {</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">         119 :     if (sm_mutex_lock(&amp;g_lock) != 0) {</span></span>
 <span id="L143"><span class="lineNum">     143</span> <span class="tlaUNC">           0 :         return; /* best-effort logging: never crash the caller */</span></span>
 <span id="L144"><span class="lineNum">     144</span>              :     }</span>
 <span id="L145"><span class="lineNum">     145</span>              : </span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">          17 :     maybe_rotate();</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">         119 :     maybe_rotate();</span></span>
 <span id="L147"><span class="lineNum">     147</span>              : </span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">          17 :     FILE *out = (g_fp != NULL) ? g_fp : stderr;</span></span>
-<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">          17 :     (void)fprintf(out, &quot;%s [%-5s] [tid=%ld] [%s::%s:%d] %s\n&quot;,</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">         119 :     FILE *out = (g_fp != NULL) ? g_fp : stderr;</span></span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">         119 :     (void)fprintf(out, &quot;%s [%-5s] [tid=%ld] [%s::%s:%d] %s\n&quot;,</span></span>
 <span id="L150"><span class="lineNum">     150</span>              :                   timebuf, level_name(level),</span>
 <span id="L151"><span class="lineNum">     151</span>              :                   get_tid(), module != NULL ? module : &quot;?&quot;,</span>
 <span id="L152"><span class="lineNum">     152</span>              :                   func != NULL ? func : &quot;?&quot;, line, msg);</span>
-<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">          17 :     if (g_fp != NULL) {</span></span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">          17 :         fflush(g_fp); /* durability over raw throughput: acceptable for this scale */</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">         119 :     if (g_fp != NULL) {</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">         119 :         fflush(g_fp); /* durability over raw throughput: acceptable for this scale */</span></span>
 <span id="L155"><span class="lineNum">     155</span>              :     }</span>
 <span id="L156"><span class="lineNum">     156</span>              : </span>
-<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">          17 :     (void)sm_mutex_unlock(&amp;g_lock);</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">         119 :     (void)sm_mutex_unlock(&amp;g_lock);</span></span>
 <span id="L158"><span class="lineNum">     158</span>              : </span>
 <span id="L159"><span class="lineNum">     159</span>              :     if (level == LOG_FATAL) {</span>
 <span id="L160"><span class="lineNum">     160</span>              :         /* Fatal conditions are surfaced but the process does NOT abort here;</span>

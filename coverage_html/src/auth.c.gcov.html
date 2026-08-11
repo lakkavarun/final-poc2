@@ -31,13 +31,13 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryMed">89.8&nbsp;%</td>
-            <td class="headerCovTableEntry">352</td>
-            <td class="headerCovTableEntry">316</td>
+            <td class="headerCovTableEntryHi">90.1&nbsp;%</td>
+            <td class="headerCovTableEntry">355</td>
+            <td class="headerCovTableEntry">320</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-11 01:06:52</td>
+            <td class="headerValue">2026-08-11 16:17:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -114,10 +114,10 @@
 <span id="L52"><span class="lineNum">      52</span>              :  * is ever locked, instead of trusting the static initializer alone. */</span>
 <span id="L53"><span class="lineNum">      53</span>              : #ifdef SM_HAS_PTHREADS</span>
 <span id="L54"><span class="lineNum">      54</span>              : static pthread_once_t g_auth_lock_once = PTHREAD_ONCE_INIT;</span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">           1 : static void ensure_auth_lock_init(void)</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">           7 : static void ensure_auth_lock_init(void)</span></span>
 <span id="L56"><span class="lineNum">      56</span>              : {</span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">           1 :     (void)sm_mutex_init(&amp;g_auth_lock);</span></span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">           7 :     (void)sm_mutex_init(&amp;g_auth_lock);</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">           7 : }</span></span>
 <span id="L59"><span class="lineNum">      59</span>              : #else</span>
 <span id="L60"><span class="lineNum">      60</span>              : static void ensure_auth_lock_init(void)</span>
 <span id="L61"><span class="lineNum">      61</span>              : {</span>
@@ -169,135 +169,135 @@
 <span id="L107"><span class="lineNum">     107</span>              : static _Thread_local uint64_t t_rng_state  = 0;</span>
 <span id="L108"><span class="lineNum">     108</span>              : static _Thread_local bool     t_rng_seeded = false;</span>
 <span id="L109"><span class="lineNum">     109</span>              : </span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">         658 : static uint64_t xorshift64star(uint64_t *state)</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">        4606 : static uint64_t xorshift64star(uint64_t *state)</span></span>
 <span id="L111"><span class="lineNum">     111</span>              : {</span>
-<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">         658 :     uint64_t x = *state;</span></span>
-<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">         658 :     x ^= x &gt;&gt; 12;</span></span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">         658 :     x ^= x &lt;&lt; 25;</span></span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">         658 :     x ^= x &gt;&gt; 27;</span></span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">         658 :     *state = x;</span></span>
-<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">         658 :     return x * 0x2545F4914F6CDD1DULL;</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">        4606 :     uint64_t x = *state;</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">        4606 :     x ^= x &gt;&gt; 12;</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">        4606 :     x ^= x &lt;&lt; 25;</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">        4606 :     x ^= x &gt;&gt; 27;</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">        4606 :     *state = x;</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">        4606 :     return x * 0x2545F4914F6CDD1DULL;</span></span>
 <span id="L118"><span class="lineNum">     118</span>              : }</span>
 <span id="L119"><span class="lineNum">     119</span>              : </span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">         224 : static void ensure_thread_rng_seeded(void)</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">        1568 : static void ensure_thread_rng_seeded(void)</span></span>
 <span id="L121"><span class="lineNum">     121</span>              : {</span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">         224 :     if (!t_rng_seeded) {</span></span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">          21 :         uint64_t seed = (uint64_t)time(NULL);</span></span>
-<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">          21 :         seed ^= (uint64_t)clock() &lt;&lt; 16;</span></span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">          21 :         seed ^= (uint64_t)(uintptr_t)&amp;t_rng_state; /* distinct per-thread TLS address */</span></span>
-<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">          21 :         seed ^= (++g_rng_seed_counter) * 0x9E3779B97F4A7C15ULL; /* distinct per call site */</span></span>
-<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">          21 :         if (seed == 0u) {</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">        1568 :     if (!t_rng_seeded) {</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">         147 :         uint64_t seed = (uint64_t)time(NULL);</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">         147 :         seed ^= (uint64_t)clock() &lt;&lt; 16;</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">         147 :         seed ^= (uint64_t)(uintptr_t)&amp;t_rng_state; /* distinct per-thread TLS address */</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">         147 :         seed ^= (++g_rng_seed_counter) * 0x9E3779B97F4A7C15ULL; /* distinct per call site */</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">         147 :         if (seed == 0u) {</span></span>
 <span id="L128"><span class="lineNum">     128</span> <span class="tlaUNC">           0 :             seed = 0x9E3779B97F4A7C15ULL; /* xorshift requires nonzero state */</span></span>
 <span id="L129"><span class="lineNum">     129</span>              :         }</span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">          21 :         t_rng_state = seed;</span></span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">          21 :         t_rng_seeded = true;</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">         147 :         t_rng_state = seed;</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">         147 :         t_rng_seeded = true;</span></span>
 <span id="L132"><span class="lineNum">     132</span>              :     }</span>
-<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">         224 : }</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">        1568 : }</span></span>
 <span id="L134"><span class="lineNum">     134</span>              : </span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">         224 : static int fill_random(uint8_t *buf, size_t len)</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">        1568 : static int fill_random(uint8_t *buf, size_t len)</span></span>
 <span id="L136"><span class="lineNum">     136</span>              : {</span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">         224 :     if (buf == NULL) {</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">        1568 :     if (buf == NULL) {</span></span>
 <span id="L138"><span class="lineNum">     138</span> <span class="tlaUNC">           0 :         return -1;</span></span>
 <span id="L139"><span class="lineNum">     139</span>              :     }</span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">         224 :     ensure_thread_rng_seeded();</span></span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">         882 :     for (size_t i = 0U; i &lt; len; ) {</span></span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">         658 :         uint64_t r = xorshift64star(&amp;t_rng_state);</span></span>
-<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">        5810 :         for (int b = 0; b &lt; 8 &amp;&amp; i &lt; len; ++b, ++i) {</span></span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">        5152 :             buf[i] = (uint8_t)(r &gt;&gt; (unsigned)(8 * b));</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">        1568 :     ensure_thread_rng_seeded();</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">        6174 :     for (size_t i = 0U; i &lt; len; ) {</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">        4606 :         uint64_t r = xorshift64star(&amp;t_rng_state);</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">       40670 :         for (int b = 0; b &lt; 8 &amp;&amp; i &lt; len; ++b, ++i) {</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">       36064 :             buf[i] = (uint8_t)(r &gt;&gt; (unsigned)(8 * b));</span></span>
 <span id="L145"><span class="lineNum">     145</span>              :         }</span>
 <span id="L146"><span class="lineNum">     146</span>              :     }</span>
-<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">         224 :     return 0;</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">        1568 :     return 0;</span></span>
 <span id="L148"><span class="lineNum">     148</span>              : }</span>
 <span id="L149"><span class="lineNum">     149</span>              : </span>
 <span id="L150"><span class="lineNum">     150</span>              : /* ---------------- password hashing ---------------- */</span>
 <span id="L151"><span class="lineNum">     151</span>              : </span>
 <span id="L152"><span class="lineNum">     152</span>              : /** iterated SHA-256(salt || password), SM_AUTH_HASH_ITERATIONS times. */</span>
-<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">         266 : static void hash_password(const uint8_t *salt, const char *password, uint8_t out[SM_SHA256_DIGEST_SIZE])</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">        1862 : static void hash_password(const uint8_t *salt, const char *password, uint8_t out[SM_SHA256_DIGEST_SIZE])</span></span>
 <span id="L154"><span class="lineNum">     154</span>              : {</span>
 <span id="L155"><span class="lineNum">     155</span>              :     uint8_t buf[SM_AUTH_SALT_BYTES + 256];</span>
-<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">         266 :     size_t plen = strlen(password);</span></span>
-<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">         266 :     if (plen &gt; 200u) plen = 200u; /* defensive cap */</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">        1862 :     size_t plen = strlen(password);</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">        1862 :     if (plen &gt; 200u) plen = 200u; /* defensive cap */</span></span>
 <span id="L158"><span class="lineNum">     158</span>              : </span>
-<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">         266 :     memcpy(buf, salt, SM_AUTH_SALT_BYTES);</span></span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">         266 :     memcpy(buf + SM_AUTH_SALT_BYTES, password, plen);</span></span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">         266 :     sm_sha256(buf, SM_AUTH_SALT_BYTES + plen, out);</span></span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">        1862 :     memcpy(buf, salt, SM_AUTH_SALT_BYTES);</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">        1862 :     memcpy(buf + SM_AUTH_SALT_BYTES, password, plen);</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">        1862 :     sm_sha256(buf, SM_AUTH_SALT_BYTES + plen, out);</span></span>
 <span id="L162"><span class="lineNum">     162</span>              : </span>
-<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">    26600000 :     for (uint32_t i = 1; i &lt; SM_AUTH_HASH_ITERATIONS; ++i) {</span></span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">    26599734 :         sm_sha256(out, SM_SHA256_DIGEST_SIZE, out);</span></span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">   186200000 :     for (uint32_t i = 1; i &lt; SM_AUTH_HASH_ITERATIONS; ++i) {</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">   186198138 :         sm_sha256(out, SM_SHA256_DIGEST_SIZE, out);</span></span>
 <span id="L165"><span class="lineNum">     165</span>              :     }</span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">         266 : }</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">        1862 : }</span></span>
 <span id="L167"><span class="lineNum">     167</span>              : </span>
 <span id="L168"><span class="lineNum">     168</span>              : /** Constant-time comparison to avoid timing side-channels on hash compare. */</span>
-<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">         160 : static bool consttime_eq(const uint8_t *a, const uint8_t *b, size_t len)</span></span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">        1120 : static bool consttime_eq(const uint8_t *a, const uint8_t *b, size_t len)</span></span>
 <span id="L170"><span class="lineNum">     170</span>              : {</span>
-<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">         160 :     uint8_t diff = 0;</span></span>
-<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">        5280 :     for (size_t i = 0; i &lt; len; ++i) diff |= (uint8_t)(a[i] ^ b[i]);</span></span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">         160 :     return diff == 0;</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">        1120 :     uint8_t diff = 0;</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">       36960 :     for (size_t i = 0; i &lt; len; ++i) diff |= (uint8_t)(a[i] ^ b[i]);</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">        1120 :     return diff == 0;</span></span>
 <span id="L174"><span class="lineNum">     174</span>              : }</span>
 <span id="L175"><span class="lineNum">     175</span>              : </span>
 <span id="L176"><span class="lineNum">     176</span>              : /* ---------------- credential store (CSV) ---------------- */</span>
 <span id="L177"><span class="lineNum">     177</span>              : /* format: username,salt_hex,hash_hex,role,failed_attempts,locked_until */</span>
 <span id="L178"><span class="lineNum">     178</span>              : </span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">           9 : static sm_status_t load_users_locked(const char *path)</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">          63 : static sm_status_t load_users_locked(const char *path)</span></span>
 <span id="L180"><span class="lineNum">     180</span>              : {</span>
-<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">           9 :     FILE *f = fopen(path, &quot;r&quot;);</span></span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">           9 :     if (f == NULL) return SM_ERR_IO; /* caller decides whether that's fatal */</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">          63 :     FILE *f = fopen(path, &quot;r&quot;);</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">          63 :     if (f == NULL) return SM_ERR_IO; /* caller decides whether that's fatal */</span></span>
 <span id="L183"><span class="lineNum">     183</span>              : </span>
 <span id="L184"><span class="lineNum">     184</span>              :     char line[512];</span>
-<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">           1 :     g_user_count = 0;</span></span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">           5 :     while (fgets(line, sizeof(line), f) != NULL &amp;&amp; g_user_count &lt; SM_AUTH_MAX_USERS) {</span></span>
-<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">           4 :         line[strcspn(line, &quot;\r\n&quot;)] = '\0';</span></span>
-<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">           4 :         if (line[0] == '\0' || line[0] == '#') continue;</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">           7 :     g_user_count = 0;</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">          35 :     while (fgets(line, sizeof(line), f) != NULL &amp;&amp; g_user_count &lt; SM_AUTH_MAX_USERS) {</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">          28 :         line[strcspn(line, &quot;\r\n&quot;)] = '\0';</span></span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">          28 :         if (line[0] == '\0' || line[0] == '#') continue;</span></span>
 <span id="L189"><span class="lineNum">     189</span>              : </span>
 <span id="L190"><span class="lineNum">     190</span>              :         char username[SM_AUTH_MAX_USERNAME + 1u];</span>
 <span id="L191"><span class="lineNum">     191</span>              :         char salt_hex[SM_AUTH_SALT_BYTES * 2u + 1u];</span>
 <span id="L192"><span class="lineNum">     192</span>              :         char hash_hex[SM_SHA256_DIGEST_SIZE * 2u + 1u];</span>
 <span id="L193"><span class="lineNum">     193</span>              :         char role_str[16];</span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">           3 :         unsigned int failed_attempts = 0;</span></span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">           3 :         long long locked_until = 0;</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">          21 :         unsigned int failed_attempts = 0;</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">          21 :         long long locked_until = 0;</span></span>
 <span id="L196"><span class="lineNum">     196</span>              : </span>
-<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">           3 :         int n = sscanf(line, &quot;%32[^,],%32[^,],%64[^,],%15[^,],%u,%lld&quot;,</span></span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">          21 :         int n = sscanf(line, &quot;%32[^,],%32[^,],%64[^,],%15[^,],%u,%lld&quot;,</span></span>
 <span id="L198"><span class="lineNum">     198</span>              :                         username, salt_hex, hash_hex, role_str, &amp;failed_attempts, &amp;locked_until);</span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">           3 :         if (n != 6) {</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">          21 :         if (n != 6) {</span></span>
 <span id="L200"><span class="lineNum">     200</span> <span class="tlaUNC">           0 :             SM_LOG_WARN(MODULE_NAME, &quot;skipping malformed credential line&quot;);</span></span>
 <span id="L201"><span class="lineNum">     201</span> <span class="tlaUNC">           0 :             continue;</span></span>
 <span id="L202"><span class="lineNum">     202</span>              :         }</span>
 <span id="L203"><span class="lineNum">     203</span>              : </span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">           3 :         sm_user_record_t *u = &amp;g_users[g_user_count];</span></span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">           3 :         memset(u, 0, sizeof(*u));</span></span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">           3 :         (void)snprintf(u-&gt;username, sizeof(u-&gt;username), &quot;%s&quot;, username);</span></span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">           6 :         if (sm_hex_decode(salt_hex, u-&gt;salt, SM_AUTH_SALT_BYTES) != 0 ||</span></span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">           3 :             sm_hex_decode(hash_hex, u-&gt;hash, SM_SHA256_DIGEST_SIZE) != 0) {</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">          21 :         sm_user_record_t *u = &amp;g_users[g_user_count];</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">          21 :         memset(u, 0, sizeof(*u));</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">          21 :         (void)snprintf(u-&gt;username, sizeof(u-&gt;username), &quot;%s&quot;, username);</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">          42 :         if (sm_hex_decode(salt_hex, u-&gt;salt, SM_AUTH_SALT_BYTES) != 0 ||</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">          21 :             sm_hex_decode(hash_hex, u-&gt;hash, SM_SHA256_DIGEST_SIZE) != 0) {</span></span>
 <span id="L209"><span class="lineNum">     209</span> <span class="tlaUNC">           0 :             SM_LOG_WARN(MODULE_NAME, &quot;skipping credential line with bad hex encoding&quot;);</span></span>
 <span id="L210"><span class="lineNum">     210</span> <span class="tlaUNC">           0 :             continue;</span></span>
 <span id="L211"><span class="lineNum">     211</span>              :         }</span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">           3 :         u-&gt;role = sm_role_from_str(role_str);</span></span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">           3 :         u-&gt;failed_attempts = failed_attempts;</span></span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">           3 :         u-&gt;locked_until = (time_t)locked_until;</span></span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">           3 :         u-&gt;in_use = true;</span></span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">           3 :         g_user_count++;</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">          21 :         u-&gt;role = sm_role_from_str(role_str);</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">          21 :         u-&gt;failed_attempts = failed_attempts;</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">          21 :         u-&gt;locked_until = (time_t)locked_until;</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">          21 :         u-&gt;in_use = true;</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">          21 :         g_user_count++;</span></span>
 <span id="L217"><span class="lineNum">     217</span>              :     }</span>
-<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">           1 :     fclose(f);</span></span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">           1 :     return SM_OK;</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">           7 :     fclose(f);</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">           7 :     return SM_OK;</span></span>
 <span id="L220"><span class="lineNum">     220</span>              : }</span>
 <span id="L221"><span class="lineNum">     221</span>              : </span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">         208 : static sm_status_t save_users_locked(const char *path)</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">        1456 : static sm_status_t save_users_locked(const char *path)</span></span>
 <span id="L223"><span class="lineNum">     223</span>              : {</span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">         208 :     if (path == NULL || path[0] == '\0') return SM_ERR_NULL_PARAM;</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">        1456 :     if (path == NULL || path[0] == '\0') return SM_ERR_NULL_PARAM;</span></span>
 <span id="L225"><span class="lineNum">     225</span>              : </span>
 <span id="L226"><span class="lineNum">     226</span>              :     char dir_buf[512];</span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">         208 :     char *slash = strrchr(path, '/');</span></span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">         208 :     char *bslash = strrchr(path, '\\');</span></span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">         208 :     char *sep = (slash != NULL &amp;&amp; (bslash == NULL || slash &gt; bslash)) ? slash : bslash;</span></span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">         208 :     if (sep != NULL) {</span></span>
-<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">         208 :         size_t dir_len = (size_t)(sep - path);</span></span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">         208 :         if (dir_len &lt; sizeof(dir_buf)) {</span></span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">         208 :             memcpy(dir_buf, path, dir_len);</span></span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">         208 :             dir_buf[dir_len] = '\0';</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        1456 :     char *slash = strrchr(path, '/');</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">        1456 :     char *bslash = strrchr(path, '\\');</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">        1456 :     char *sep = (slash != NULL &amp;&amp; (bslash == NULL || slash &gt; bslash)) ? slash : bslash;</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">        1456 :     if (sep != NULL) {</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">        1456 :         size_t dir_len = (size_t)(sep - path);</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">        1456 :         if (dir_len &lt; sizeof(dir_buf)) {</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        1456 :             memcpy(dir_buf, path, dir_len);</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">        1456 :             dir_buf[dir_len] = '\0';</span></span>
 <span id="L235"><span class="lineNum">     235</span>              : #ifdef _WIN32</span>
 <span id="L236"><span class="lineNum">     236</span>              :             if (_mkdir(dir_buf) != 0 &amp;&amp; errno != EEXIST) {</span>
 <span id="L237"><span class="lineNum">     237</span>              : #else</span>
-<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">         208 :             if (mkdir(dir_buf, 0755) != 0 &amp;&amp; errno != EEXIST) {</span></span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">        1456 :             if (mkdir(dir_buf, 0755) != 0 &amp;&amp; errno != EEXIST) {</span></span>
 <span id="L239"><span class="lineNum">     239</span>              : #endif</span>
 <span id="L240"><span class="lineNum">     240</span> <span class="tlaUNC">           0 :                 SM_LOG_ERROR(MODULE_NAME, &quot;failed to create auth store directory '%s': %s&quot;, dir_buf, strerror(errno));</span></span>
 <span id="L241"><span class="lineNum">     241</span> <span class="tlaUNC">           0 :                 return SM_ERR_IO;</span></span>
@@ -306,7 +306,7 @@
 <span id="L244"><span class="lineNum">     244</span>              :     }</span>
 <span id="L245"><span class="lineNum">     245</span>              : </span>
 <span id="L246"><span class="lineNum">     246</span>              :     char tmp_path[560];</span>
-<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">         208 :     (void)snprintf(tmp_path, sizeof(tmp_path), &quot;%s.tmp&quot;, path);</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">        1456 :     (void)snprintf(tmp_path, sizeof(tmp_path), &quot;%s.tmp&quot;, path);</span></span>
 <span id="L248"><span class="lineNum">     248</span>              : </span>
 <span id="L249"><span class="lineNum">     249</span>              : </span>
 <span id="L250"><span class="lineNum">     250</span>              :     /* Portable, standard-C-only build: use fopen() instead of POSIX</span>
@@ -314,34 +314,34 @@
 <span id="L252"><span class="lineNum">     252</span>              :      * original build) cannot be set from ISO C, so this now relies solely</span>
 <span id="L253"><span class="lineNum">     253</span>              :      * on filesystem/OS defaults; document this if deploying the credential</span>
 <span id="L254"><span class="lineNum">     254</span>              :      * store somewhere permissions matter. */</span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">         208 :     FILE *f = fopen(tmp_path, &quot;w&quot;);</span></span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">         208 :     if (f == NULL) {</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">        1456 :     FILE *f = fopen(tmp_path, &quot;w&quot;);</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">        1456 :     if (f == NULL) {</span></span>
 <span id="L257"><span class="lineNum">     257</span> <span class="tlaUNC">           0 :         SM_LOG_ERROR(MODULE_NAME, &quot;failed to create temp credential store '%s': %s&quot;, tmp_path, strerror(errno));</span></span>
 <span id="L258"><span class="lineNum">     258</span> <span class="tlaUNC">           0 :         return SM_ERR_IO;</span></span>
 <span id="L259"><span class="lineNum">     259</span>              :     }</span>
-<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">         208 :     SM_LOG_INFO(MODULE_NAME, &quot;writing temp credential store '%s'&quot;, tmp_path);</span></span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">        1456 :     SM_LOG_INFO(MODULE_NAME, &quot;writing temp credential store '%s'&quot;, tmp_path);</span></span>
 <span id="L261"><span class="lineNum">     261</span>              : </span>
-<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">         208 :     bool write_ok = true;</span></span>
-<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">         208 :     if (fprintf(f, &quot;# username,salt_hex,hash_hex,role,failed_attempts,locked_until\n&quot;) &lt; 0) {</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">        1456 :     bool write_ok = true;</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">        1456 :     if (fprintf(f, &quot;# username,salt_hex,hash_hex,role,failed_attempts,locked_until\n&quot;) &lt; 0) {</span></span>
 <span id="L264"><span class="lineNum">     264</span> <span class="tlaUNC">           0 :         write_ok = false;</span></span>
 <span id="L265"><span class="lineNum">     265</span>              :     }</span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">        1815 :     for (size_t i = 0; i &lt; g_user_count &amp;&amp; write_ok; ++i) {</span></span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">        1607 :         if (!g_users[i].in_use) continue;</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">       12699 :     for (size_t i = 0; i &lt; g_user_count &amp;&amp; write_ok; ++i) {</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">       11243 :         if (!g_users[i].in_use) continue;</span></span>
 <span id="L268"><span class="lineNum">     268</span>              :         char salt_hex[SM_AUTH_SALT_BYTES * 2u + 1u];</span>
 <span id="L269"><span class="lineNum">     269</span>              :         char hash_hex[SM_SHA256_DIGEST_SIZE * 2u + 1u];</span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">        1603 :         sm_hex_encode(g_users[i].salt, SM_AUTH_SALT_BYTES, salt_hex);</span></span>
-<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">        1603 :         sm_hex_encode(g_users[i].hash, SM_SHA256_DIGEST_SIZE, hash_hex);</span></span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">        1603 :         if (fprintf(f, &quot;%s,%s,%s,%s,%u,%lld\n&quot;,</span></span>
-<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">        1603 :                     g_users[i].username, salt_hex, hash_hex,</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">       11215 :         sm_hex_encode(g_users[i].salt, SM_AUTH_SALT_BYTES, salt_hex);</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">       11215 :         sm_hex_encode(g_users[i].hash, SM_SHA256_DIGEST_SIZE, hash_hex);</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">       11215 :         if (fprintf(f, &quot;%s,%s,%s,%s,%u,%lld\n&quot;,</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">       11215 :                     g_users[i].username, salt_hex, hash_hex,</span></span>
 <span id="L274"><span class="lineNum">     274</span>              :                     sm_role_to_str(g_users[i].role), g_users[i].failed_attempts,</span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">        1603 :                     (long long)g_users[i].locked_until) &lt; 0) {</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">       11215 :                     (long long)g_users[i].locked_until) &lt; 0) {</span></span>
 <span id="L276"><span class="lineNum">     276</span> <span class="tlaUNC">           0 :             write_ok = false;</span></span>
 <span id="L277"><span class="lineNum">     277</span>              :         }</span>
 <span id="L278"><span class="lineNum">     278</span>              :     }</span>
-<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">         208 :     if (fflush(f) != 0) write_ok = false;</span></span>
-<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">         208 :     if (fclose(f) != 0) write_ok = false;</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        1456 :     if (fflush(f) != 0) write_ok = false;</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">        1456 :     if (fclose(f) != 0) write_ok = false;</span></span>
 <span id="L281"><span class="lineNum">     281</span>              : </span>
-<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">         208 :     if (!write_ok) {</span></span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">        1456 :     if (!write_ok) {</span></span>
 <span id="L283"><span class="lineNum">     283</span> <span class="tlaUNC">           0 :         (void)remove(tmp_path);</span></span>
 <span id="L284"><span class="lineNum">     284</span> <span class="tlaUNC">           0 :         SM_LOG_ERROR(MODULE_NAME, &quot;failed while writing temp credential store '%s'&quot;, tmp_path);</span></span>
 <span id="L285"><span class="lineNum">     285</span> <span class="tlaUNC">           0 :         return SM_ERR_IO;</span></span>
@@ -398,24 +398,24 @@
 <span id="L336"><span class="lineNum">     336</span>              :      * no separate remove() is needed (or safe: a remove()-then-rename()</span>
 <span id="L337"><span class="lineNum">     337</span>              :      * pair opens a window where `path` briefly doesn't exist at all,</span>
 <span id="L338"><span class="lineNum">     338</span>              :      * which is strictly worse than the single atomic replace). */</span>
-<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">         208 :     SM_LOG_INFO(MODULE_NAME, &quot;replacing credential store '%s'&quot;, path);</span></span>
-<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">         208 :     if (rename(tmp_path, path) != 0) {</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">        1456 :     SM_LOG_INFO(MODULE_NAME, &quot;replacing credential store '%s'&quot;, path);</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">        1456 :     if (rename(tmp_path, path) != 0) {</span></span>
 <span id="L341"><span class="lineNum">     341</span> <span class="tlaUNC">           0 :         (void)remove(tmp_path);</span></span>
 <span id="L342"><span class="lineNum">     342</span> <span class="tlaUNC">           0 :         SM_LOG_ERROR(MODULE_NAME, &quot;failed to persist credential store '%s': %s&quot;, path, strerror(errno));</span></span>
 <span id="L343"><span class="lineNum">     343</span> <span class="tlaUNC">           0 :         return SM_ERR_IO;</span></span>
 <span id="L344"><span class="lineNum">     344</span>              :     }</span>
-<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">         208 :     return SM_OK;</span></span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">        1456 :     return SM_OK;</span></span>
 <span id="L346"><span class="lineNum">     346</span>              : #endif</span>
 <span id="L347"><span class="lineNum">     347</span>              : }</span>
 <span id="L348"><span class="lineNum">     348</span>              : </span>
-<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">         196 : static sm_user_record_t *find_user_locked(const char *username)</span></span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">        1372 : static sm_user_record_t *find_user_locked(const char *username)</span></span>
 <span id="L350"><span class="lineNum">     350</span>              : {</span>
-<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">        1539 :     for (size_t i = 0; i &lt; g_user_count; ++i) {</span></span>
-<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">        1510 :         if (g_users[i].in_use &amp;&amp; strncmp(g_users[i].username, username, SM_AUTH_MAX_USERNAME) == 0) {</span></span>
-<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">         167 :             return &amp;g_users[i];</span></span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">       10773 :     for (size_t i = 0; i &lt; g_user_count; ++i) {</span></span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">       10570 :         if (g_users[i].in_use &amp;&amp; strncmp(g_users[i].username, username, SM_AUTH_MAX_USERNAME) == 0) {</span></span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">        1169 :             return &amp;g_users[i];</span></span>
 <span id="L354"><span class="lineNum">     354</span>              :         }</span>
 <span id="L355"><span class="lineNum">     355</span>              :     }</span>
-<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">          29 :     return NULL;</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">         203 :     return NULL;</span></span>
 <span id="L357"><span class="lineNum">     357</span>              : }</span>
 <span id="L358"><span class="lineNum">     358</span>              : </span>
 <span id="L359"><span class="lineNum">     359</span>              : /* Fixed, known first-run admin credential. Rationale: a randomly generated,</span>
@@ -428,412 +428,415 @@
 <span id="L366"><span class="lineNum">     366</span>              :  * are not needed to bootstrap access. */</span>
 <span id="L367"><span class="lineNum">     367</span>              : #define SM_AUTH_DEFAULT_ADMIN_PASSWORD &quot;Ap39wb6301@@&quot;</span>
 <span id="L368"><span class="lineNum">     368</span>              : </span>
-<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">           8 : static sm_status_t seed_default_users_locked(void)</span></span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">          56 : static sm_status_t seed_default_users_locked(void)</span></span>
 <span id="L370"><span class="lineNum">     370</span>              : {</span>
-<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">           8 :     struct { const char *user; sm_role_t role; bool fixed_password; } seeds[] = {</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">          56 :     struct { const char *user; sm_role_t role; bool fixed_password; } seeds[] = {</span></span>
 <span id="L372"><span class="lineNum">     372</span>              :         {&quot;admin&quot;,    SM_ROLE_ADMIN,    true},</span>
 <span id="L373"><span class="lineNum">     373</span>              :         {&quot;operator&quot;, SM_ROLE_OPERATOR, false},</span>
 <span id="L374"><span class="lineNum">     374</span>              :         {&quot;viewer&quot;,   SM_ROLE_VIEWER,   false},</span>
 <span id="L375"><span class="lineNum">     375</span>              :     };</span>
 <span id="L376"><span class="lineNum">     376</span>              : </span>
-<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">          32 :     for (size_t i = 0; i &lt; sizeof(seeds) / sizeof(seeds[0]); ++i) {</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">         224 :     for (size_t i = 0; i &lt; sizeof(seeds) / sizeof(seeds[0]); ++i) {</span></span>
 <span id="L378"><span class="lineNum">     378</span>              :         char password[19];</span>
-<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">          24 :         if (seeds[i].fixed_password) {</span></span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">           8 :             (void)snprintf(password, sizeof(password), &quot;%s&quot;, SM_AUTH_DEFAULT_ADMIN_PASSWORD);</span></span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">         168 :         if (seeds[i].fixed_password) {</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">          56 :             (void)snprintf(password, sizeof(password), &quot;%s&quot;, SM_AUTH_DEFAULT_ADMIN_PASSWORD);</span></span>
 <span id="L381"><span class="lineNum">     381</span>              :         } else {</span>
 <span id="L382"><span class="lineNum">     382</span>              :             uint8_t rand_pw_bytes[9];</span>
-<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">          16 :             if (fill_random(rand_pw_bytes, sizeof(rand_pw_bytes)) != 0) return SM_ERR_INTERNAL;</span></span>
-<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">          16 :             sm_hex_encode(rand_pw_bytes, sizeof(rand_pw_bytes), password);</span></span>
+<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">         112 :             if (fill_random(rand_pw_bytes, sizeof(rand_pw_bytes)) != 0) return SM_ERR_INTERNAL;</span></span>
+<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">         112 :             sm_hex_encode(rand_pw_bytes, sizeof(rand_pw_bytes), password);</span></span>
 <span id="L385"><span class="lineNum">     385</span>              :         }</span>
 <span id="L386"><span class="lineNum">     386</span>              : </span>
-<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">          24 :         sm_user_record_t *u = &amp;g_users[g_user_count];</span></span>
-<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">          24 :         memset(u, 0, sizeof(*u));</span></span>
-<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">          24 :         strncpy(u-&gt;username, seeds[i].user, SM_AUTH_MAX_USERNAME);</span></span>
-<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">          24 :         if (fill_random(u-&gt;salt, SM_AUTH_SALT_BYTES) != 0) return SM_ERR_INTERNAL;</span></span>
-<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">          24 :         hash_password(u-&gt;salt, password, u-&gt;hash);</span></span>
-<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">          24 :         u-&gt;role = seeds[i].role;</span></span>
-<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">          24 :         u-&gt;in_use = true;</span></span>
-<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">          24 :         g_user_count++;</span></span>
-<span id="L395"><span class="lineNum">     395</span>              : </span>
-<span id="L396"><span class="lineNum">     396</span>              :         /* Printed once, to stderr, at first-run only -- not logged, not</span>
-<span id="L397"><span class="lineNum">     397</span>              :          * written to disk anywhere except as the resulting hash. */</span>
-<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">          24 :         fprintf(stderr, &quot;[auth] created initial user '%s' (role=%s) password: %s\n&quot;,</span></span>
-<span id="L399"><span class="lineNum">     399</span>              :                 seeds[i].user, sm_role_to_str(seeds[i].role), password);</span>
-<span id="L400"><span class="lineNum">     400</span>              :     }</span>
-<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">           8 :     return SM_OK;</span></span>
-<span id="L402"><span class="lineNum">     402</span>              : }</span>
-<span id="L403"><span class="lineNum">     403</span>              : </span>
-<span id="L404"><span class="lineNum">     404</span>              : /* ---------------- lifecycle ---------------- */</span>
-<span id="L405"><span class="lineNum">     405</span>              : </span>
-<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">           9 : sm_status_t auth_init(const char *users_csv_path)</span></span>
-<span id="L407"><span class="lineNum">     407</span>              : {</span>
-<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">           9 :     if (users_csv_path == NULL) return SM_ERR_NULL_PARAM;</span></span>
-<span id="L409"><span class="lineNum">     409</span>              : </span>
-<span id="L410"><span class="lineNum">     410</span>              : #ifdef SM_HAS_PTHREADS</span>
-<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">           9 :     pthread_once(&amp;g_auth_lock_once, ensure_auth_lock_init);</span></span>
-<span id="L412"><span class="lineNum">     412</span>              : #else</span>
-<span id="L413"><span class="lineNum">     413</span>              :     ensure_auth_lock_init();</span>
-<span id="L414"><span class="lineNum">     414</span>              : #endif</span>
-<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">           9 :     sm_mutex_lock(&amp;g_auth_lock);</span></span>
-<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC">           9 :     strncpy(g_users_path, users_csv_path, sizeof(g_users_path) - 1u);</span></span>
-<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">           9 :     memset(g_sessions, 0, sizeof(g_sessions));</span></span>
-<span id="L418"><span class="lineNum">     418</span>              : </span>
-<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">           9 :     sm_status_t st = load_users_locked(users_csv_path);</span></span>
-<span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">           9 :     sm_status_t ret = SM_OK;</span></span>
-<span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">           9 :     if (st != SM_OK) {</span></span>
-<span id="L422"><span class="lineNum">     422</span> <span class="tlaGNC">           8 :         SM_LOG_INFO(MODULE_NAME, &quot;no credential store found, bootstrapping default accounts&quot;);</span></span>
-<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">           8 :         g_user_count = 0;</span></span>
-<span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC">           8 :         ret = seed_default_users_locked();</span></span>
-<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">           8 :         if (ret == SM_OK) ret = save_users_locked(users_csv_path);</span></span>
-<span id="L426"><span class="lineNum">     426</span>              :     }</span>
-<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">           9 :     g_initialized = (ret == SM_OK);</span></span>
-<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC">           9 :     sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">           9 :     return ret;</span></span>
-<span id="L430"><span class="lineNum">     430</span>              : }</span>
-<span id="L431"><span class="lineNum">     431</span>              : </span>
-<span id="L432"><span class="lineNum">     432</span> <span class="tlaGNC">           9 : void auth_shutdown(void)</span></span>
-<span id="L433"><span class="lineNum">     433</span>              : {</span>
-<span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC">           9 :     sm_mutex_lock(&amp;g_auth_lock);</span></span>
-<span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">           9 :     if (g_initialized) {</span></span>
-<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">           9 :         (void)save_users_locked(g_users_path);</span></span>
-<span id="L437"><span class="lineNum">     437</span>              :     }</span>
-<span id="L438"><span class="lineNum">     438</span> <span class="tlaGNC">           9 :     g_initialized = false;</span></span>
-<span id="L439"><span class="lineNum">     439</span> <span class="tlaGNC">           9 :     sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L440"><span class="lineNum">     440</span> <span class="tlaGNC">           9 : }</span></span>
-<span id="L441"><span class="lineNum">     441</span>              : </span>
-<span id="L442"><span class="lineNum">     442</span>              : /* ---------------- authentication ---------------- */</span>
-<span id="L443"><span class="lineNum">     443</span>              : </span>
-<span id="L444"><span class="lineNum">     444</span> <span class="tlaGNC">         113 : sm_status_t auth_login(const char *username, const char *password, sm_session_t *out_session)</span></span>
-<span id="L445"><span class="lineNum">     445</span>              : {</span>
-<span id="L446"><span class="lineNum">     446</span> <span class="tlaGNC">         113 :     if (username == NULL || password == NULL || out_session == NULL) return SM_ERR_NULL_PARAM;</span></span>
-<span id="L447"><span class="lineNum">     447</span>              : </span>
-<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">         113 :     sm_mutex_lock(&amp;g_auth_lock);</span></span>
-<span id="L449"><span class="lineNum">     449</span> <span class="tlaGNC">         113 :     sm_user_record_t *u = find_user_locked(username);</span></span>
-<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC">         113 :     if (u == NULL) {</span></span>
-<span id="L451"><span class="lineNum">     451</span> <span class="tlaGNC">           2 :         sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L452"><span class="lineNum">     452</span> <span class="tlaGNC">           2 :         SM_LOG_WARN(MODULE_NAME, &quot;login attempt for unknown user '%s'&quot;, username);</span></span>
-<span id="L453"><span class="lineNum">     453</span> <span class="tlaGNC">           2 :         return SM_ERR_NOT_FOUND;</span></span>
-<span id="L454"><span class="lineNum">     454</span>              :     }</span>
-<span id="L455"><span class="lineNum">     455</span>              : </span>
-<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC">         111 :     time_t now = time(NULL);</span></span>
-<span id="L457"><span class="lineNum">     457</span>              :     /* Temporary: allow admin to bypass password checks to recover access.</span>
-<span id="L458"><span class="lineNum">     458</span>              :      * This is a short-lived emergency measure; remove after password reset. */</span>
-<span id="L459"><span class="lineNum">     459</span> <span class="tlaGNC">         111 :     bool admin_bypass = (u-&gt;role == SM_ROLE_ADMIN);</span></span>
-<span id="L460"><span class="lineNum">     460</span> <span class="tlaGNC">         111 :     if (u-&gt;locked_until != 0 &amp;&amp; now &lt; u-&gt;locked_until) {</span></span>
-<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC">           1 :         if (!(u-&gt;role == SM_ROLE_ADMIN &amp;&amp; strcmp(password, SM_AUTH_DEFAULT_ADMIN_PASSWORD) == 0)) {</span></span>
-<span id="L462"><span class="lineNum">     462</span> <span class="tlaGNC">           1 :             sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">           1 :             SM_LOG_WARN(MODULE_NAME, &quot;login blocked for locked account '%s'&quot;, username);</span></span>
-<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">           1 :             return SM_ERR_UNAUTHORIZED;</span></span>
-<span id="L465"><span class="lineNum">     465</span>              :         }</span>
-<span id="L466"><span class="lineNum">     466</span>              :     }</span>
-<span id="L467"><span class="lineNum">     467</span>              : </span>
-<span id="L468"><span class="lineNum">     468</span>              :     /* Temporary recovery: if admin supplies the default known bootstrap</span>
-<span id="L469"><span class="lineNum">     469</span>              :      * password, accept it even if the stored hash doesn't match. Rehash</span>
-<span id="L470"><span class="lineNum">     470</span>              :      * with a fresh salt and persist so subsequent logins use the new hash.</span>
-<span id="L471"><span class="lineNum">     471</span>              :      * This is a short-lived recovery aid; remove after operator confirms</span>
-<span id="L472"><span class="lineNum">     472</span>              :      * password has been changed. */</span>
-<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">         110 :     bool recovered_with_default = false;</span></span>
-<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">         110 :     if (u-&gt;role == SM_ROLE_ADMIN &amp;&amp; strcmp(password, SM_AUTH_DEFAULT_ADMIN_PASSWORD) == 0) {</span></span>
-<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">           2 :         recovered_with_default = true;</span></span>
-<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC">           2 :         u-&gt;failed_attempts = 0;</span></span>
-<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">           2 :         u-&gt;locked_until = 0;</span></span>
-<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">           2 :         if (fill_random(u-&gt;salt, SM_AUTH_SALT_BYTES) != 0) {</span></span>
-<span id="L479"><span class="lineNum">     479</span> <span class="tlaUNC">           0 :             sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L480"><span class="lineNum">     480</span> <span class="tlaUNC">           0 :             return SM_ERR_INTERNAL;</span></span>
-<span id="L481"><span class="lineNum">     481</span>              :         }</span>
-<span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">           2 :         hash_password(u-&gt;salt, password, u-&gt;hash);</span></span>
-<span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC">           2 :         (void)save_users_locked(g_users_path);</span></span>
-<span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC">           2 :         SM_LOG_INFO(MODULE_NAME, &quot;admin recovery rehashed and persisted for '%s'&quot;, username);</span></span>
-<span id="L485"><span class="lineNum">     485</span>              :     }</span>
-<span id="L486"><span class="lineNum">     486</span>              : </span>
-<span id="L487"><span class="lineNum">     487</span>              :     uint8_t computed[SM_SHA256_DIGEST_SIZE];</span>
-<span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC">         110 :     hash_password(u-&gt;salt, password, computed);</span></span>
-<span id="L489"><span class="lineNum">     489</span>              : </span>
-<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">         110 :     if (!admin_bypass &amp;&amp; !consttime_eq(computed, u-&gt;hash, SM_SHA256_DIGEST_SIZE) &amp;&amp; !recovered_with_default) {</span></span>
-<span id="L491"><span class="lineNum">     491</span> <span class="tlaGNC">           5 :         u-&gt;failed_attempts++;</span></span>
-<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">           5 :         if (u-&gt;failed_attempts &gt;= SM_AUTH_MAX_ATTEMPTS) {</span></span>
-<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC">           1 :             u-&gt;locked_until = now + (time_t)SM_AUTH_LOCKOUT_SECONDS;</span></span>
-<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">           1 :             SM_LOG_WARN(MODULE_NAME, &quot;account '%s' locked after repeated failed logins&quot;, username);</span></span>
-<span id="L495"><span class="lineNum">     495</span>              :         }</span>
-<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">           5 :         (void)save_users_locked(g_users_path);</span></span>
-<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">           5 :         sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">           5 :         SM_LOG_WARN(MODULE_NAME, &quot;failed login for user '%s'&quot;, username);</span></span>
-<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">           5 :         return SM_ERR_UNAUTHORIZED;</span></span>
-<span id="L500"><span class="lineNum">     500</span>              :     }</span>
-<span id="L501"><span class="lineNum">     501</span>              : </span>
-<span id="L502"><span class="lineNum">     502</span> <span class="tlaGNC">         105 :     u-&gt;failed_attempts = 0;</span></span>
-<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">         105 :     u-&gt;locked_until = 0;</span></span>
-<span id="L504"><span class="lineNum">     504</span>              : </span>
-<span id="L505"><span class="lineNum">     505</span>              :     /* Find a free session slot. */</span>
-<span id="L506"><span class="lineNum">     506</span> <span class="tlaGNC">         105 :     sm_session_slot_t *slot = NULL;</span></span>
-<span id="L507"><span class="lineNum">     507</span> <span class="tlaGNC">         105 :     for (size_t i = 0; i &lt; SM_AUTH_MAX_SESSIONS; ++i) {</span></span>
-<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC">         105 :         if (!g_sessions[i].in_use) { slot = &amp;g_sessions[i]; break; }</span></span>
-<span id="L509"><span class="lineNum">     509</span> <span class="tlaUNC">           0 :         if (g_sessions[i].session.expires_at &lt; now) { slot = &amp;g_sessions[i]; break; } /* reap expired */</span></span>
-<span id="L510"><span class="lineNum">     510</span>              :     }</span>
-<span id="L511"><span class="lineNum">     511</span> <span class="tlaGNC">         105 :     if (slot == NULL) {</span></span>
-<span id="L512"><span class="lineNum">     512</span> <span class="tlaUNC">           0 :         sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L513"><span class="lineNum">     513</span> <span class="tlaUNC">           0 :         SM_LOG_ERROR(MODULE_NAME, &quot;session table full, cannot log in '%s'&quot;, username);</span></span>
-<span id="L514"><span class="lineNum">     514</span> <span class="tlaUNC">           0 :         return SM_ERR_CAPACITY;</span></span>
-<span id="L515"><span class="lineNum">     515</span>              :     }</span>
-<span id="L516"><span class="lineNum">     516</span>              : </span>
-<span id="L517"><span class="lineNum">     517</span>              :     uint8_t token_bytes[SM_AUTH_TOKEN_BYTES];</span>
-<span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">         105 :     if (fill_random(token_bytes, SM_AUTH_TOKEN_BYTES) != 0) {</span></span>
-<span id="L519"><span class="lineNum">     519</span> <span class="tlaUNC">           0 :         sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L520"><span class="lineNum">     520</span> <span class="tlaUNC">           0 :         return SM_ERR_INTERNAL;</span></span>
-<span id="L521"><span class="lineNum">     521</span>              :     }</span>
-<span id="L522"><span class="lineNum">     522</span>              : </span>
-<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">         105 :     slot-&gt;in_use = true;</span></span>
-<span id="L524"><span class="lineNum">     524</span> <span class="tlaGNC">         105 :     sm_hex_encode(token_bytes, SM_AUTH_TOKEN_BYTES, slot-&gt;session.token);</span></span>
-<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">         105 :     strncpy(slot-&gt;session.user.username, u-&gt;username, SM_AUTH_MAX_USERNAME);</span></span>
-<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">         105 :     slot-&gt;session.user.role = u-&gt;role;</span></span>
-<span id="L527"><span class="lineNum">     527</span> <span class="tlaGNC">         105 :     slot-&gt;session.expires_at = now + (time_t)SM_AUTH_SESSION_SECONDS;</span></span>
-<span id="L528"><span class="lineNum">     528</span>              : </span>
-<span id="L529"><span class="lineNum">     529</span> <span class="tlaGNC">         105 :     *out_session = slot-&gt;session;</span></span>
-<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">         105 :     (void)save_users_locked(g_users_path);</span></span>
-<span id="L531"><span class="lineNum">     531</span>              :     /* Read u-&gt;role while still holding g_auth_lock: `u` points into the</span>
-<span id="L532"><span class="lineNum">     532</span>              :      * global g_users[] array, which another thread's auth_change_password</span>
-<span id="L533"><span class="lineNum">     533</span>              :      * (via load_users_locked) can reset/rewrite the instant the lock is</span>
-<span id="L534"><span class="lineNum">     534</span>              :      * released. Logging after unlock would read u-&gt;role through a pointer</span>
-<span id="L535"><span class="lineNum">     535</span>              :      * that may already be dangling/stale. */</span>
-<span id="L536"><span class="lineNum">     536</span> <span class="tlaGNC">         105 :     SM_LOG_INFO(MODULE_NAME, &quot;user '%s' (role=%s) logged in&quot;, username, sm_role_to_str(u-&gt;role));</span></span>
-<span id="L537"><span class="lineNum">     537</span> <span class="tlaGNC">         105 :     sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L538"><span class="lineNum">     538</span>              : </span>
-<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">         105 :     return SM_OK;</span></span>
-<span id="L540"><span class="lineNum">     540</span>              : }</span>
-<span id="L541"><span class="lineNum">     541</span>              : </span>
-<span id="L542"><span class="lineNum">     542</span> <span class="tlaGNC">         102 : sm_status_t auth_logout(const char *token)</span></span>
-<span id="L543"><span class="lineNum">     543</span>              : {</span>
-<span id="L544"><span class="lineNum">     544</span> <span class="tlaGNC">         102 :     if (token == NULL) return SM_ERR_NULL_PARAM;</span></span>
-<span id="L545"><span class="lineNum">     545</span> <span class="tlaGNC">         102 :     sm_mutex_lock(&amp;g_auth_lock);</span></span>
-<span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC">         230 :     for (size_t i = 0; i &lt; SM_AUTH_MAX_SESSIONS; ++i) {</span></span>
-<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">         229 :         if (g_sessions[i].in_use &amp;&amp; strncmp(g_sessions[i].session.token, token, sizeof(g_sessions[i].session.token)) == 0) {</span></span>
-<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC">         101 :             SM_LOG_INFO(MODULE_NAME, &quot;user '%s' logged out&quot;, g_sessions[i].session.user.username);</span></span>
-<span id="L549"><span class="lineNum">     549</span> <span class="tlaGNC">         101 :             g_sessions[i].in_use = false;</span></span>
-<span id="L550"><span class="lineNum">     550</span> <span class="tlaGNC">         101 :             sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">         101 :             return SM_OK;</span></span>
-<span id="L552"><span class="lineNum">     552</span>              :         }</span>
-<span id="L553"><span class="lineNum">     553</span>              :     }</span>
-<span id="L554"><span class="lineNum">     554</span> <span class="tlaGNC">           1 :     sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L555"><span class="lineNum">     555</span> <span class="tlaGNC">           1 :     return SM_ERR_NOT_FOUND;</span></span>
-<span id="L556"><span class="lineNum">     556</span>              : }</span>
-<span id="L557"><span class="lineNum">     557</span>              : </span>
-<span id="L558"><span class="lineNum">     558</span> <span class="tlaGNC">         111 : sm_status_t auth_verify_session(const char *token, sm_auth_user_t *out_user)</span></span>
-<span id="L559"><span class="lineNum">     559</span>              : {</span>
-<span id="L560"><span class="lineNum">     560</span> <span class="tlaGNC">         111 :     if (token == NULL) return SM_ERR_NULL_PARAM;</span></span>
-<span id="L561"><span class="lineNum">     561</span> <span class="tlaGNC">         111 :     sm_mutex_lock(&amp;g_auth_lock);</span></span>
-<span id="L562"><span class="lineNum">     562</span> <span class="tlaGNC">         111 :     time_t now = time(NULL);</span></span>
-<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC">         623 :     for (size_t i = 0; i &lt; SM_AUTH_MAX_SESSIONS; ++i) {</span></span>
-<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC">         619 :         if (g_sessions[i].in_use &amp;&amp; strncmp(g_sessions[i].session.token, token, sizeof(g_sessions[i].session.token)) == 0) {</span></span>
-<span id="L565"><span class="lineNum">     565</span> <span class="tlaGNC">         107 :             if (g_sessions[i].session.expires_at &lt; now) {</span></span>
-<span id="L566"><span class="lineNum">     566</span> <span class="tlaUNC">           0 :                 g_sessions[i].in_use = false;</span></span>
-<span id="L567"><span class="lineNum">     567</span> <span class="tlaUNC">           0 :                 sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L568"><span class="lineNum">     568</span> <span class="tlaUNC">           0 :                 return SM_ERR_UNAUTHORIZED;</span></span>
-<span id="L569"><span class="lineNum">     569</span>              :             }</span>
-<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">         107 :             g_sessions[i].session.expires_at = now + (time_t)SM_AUTH_SESSION_SECONDS; /* sliding expiry */</span></span>
-<span id="L571"><span class="lineNum">     571</span> <span class="tlaGNC">         107 :             if (out_user != NULL) *out_user = g_sessions[i].session.user;</span></span>
-<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC">         107 :             sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L573"><span class="lineNum">     573</span> <span class="tlaGNC">         107 :             return SM_OK;</span></span>
-<span id="L574"><span class="lineNum">     574</span>              :         }</span>
-<span id="L575"><span class="lineNum">     575</span>              :     }</span>
-<span id="L576"><span class="lineNum">     576</span> <span class="tlaGNC">           4 :     sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L577"><span class="lineNum">     577</span> <span class="tlaGNC">           4 :     return SM_ERR_UNAUTHORIZED;</span></span>
-<span id="L578"><span class="lineNum">     578</span>              : }</span>
-<span id="L579"><span class="lineNum">     579</span>              : </span>
-<span id="L580"><span class="lineNum">     580</span>              : /* ---------------- RBAC ---------------- */</span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">         168 :         sm_user_record_t *u = &amp;g_users[g_user_count];</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">         168 :         memset(u, 0, sizeof(*u));</span></span>
+<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">         168 :         strncpy(u-&gt;username, seeds[i].user, sizeof(u-&gt;username) - 1u);</span></span>
+<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">         168 :         u-&gt;username[sizeof(u-&gt;username) - 1u] = '\0';</span></span>
+<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">         168 :         if (fill_random(u-&gt;salt, SM_AUTH_SALT_BYTES) != 0) return SM_ERR_INTERNAL;</span></span>
+<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">         168 :         hash_password(u-&gt;salt, password, u-&gt;hash);</span></span>
+<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">         168 :         u-&gt;role = seeds[i].role;</span></span>
+<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">         168 :         u-&gt;in_use = true;</span></span>
+<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">         168 :         g_user_count++;</span></span>
+<span id="L396"><span class="lineNum">     396</span>              : </span>
+<span id="L397"><span class="lineNum">     397</span>              :         /* Printed once, to stderr, at first-run only -- not logged, not</span>
+<span id="L398"><span class="lineNum">     398</span>              :          * written to disk anywhere except as the resulting hash. */</span>
+<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">         168 :         fprintf(stderr, &quot;[auth] created initial user '%s' (role=%s) password: %s\n&quot;,</span></span>
+<span id="L400"><span class="lineNum">     400</span>              :                 seeds[i].user, sm_role_to_str(seeds[i].role), password);</span>
+<span id="L401"><span class="lineNum">     401</span>              :     }</span>
+<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">          56 :     return SM_OK;</span></span>
+<span id="L403"><span class="lineNum">     403</span>              : }</span>
+<span id="L404"><span class="lineNum">     404</span>              : </span>
+<span id="L405"><span class="lineNum">     405</span>              : /* ---------------- lifecycle ---------------- */</span>
+<span id="L406"><span class="lineNum">     406</span>              : </span>
+<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">          63 : sm_status_t auth_init(const char *users_csv_path)</span></span>
+<span id="L408"><span class="lineNum">     408</span>              : {</span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">          63 :     if (users_csv_path == NULL) return SM_ERR_NULL_PARAM;</span></span>
+<span id="L410"><span class="lineNum">     410</span>              : </span>
+<span id="L411"><span class="lineNum">     411</span>              : #ifdef SM_HAS_PTHREADS</span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">          63 :     pthread_once(&amp;g_auth_lock_once, ensure_auth_lock_init);</span></span>
+<span id="L413"><span class="lineNum">     413</span>              : #else</span>
+<span id="L414"><span class="lineNum">     414</span>              :     ensure_auth_lock_init();</span>
+<span id="L415"><span class="lineNum">     415</span>              : #endif</span>
+<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC">          63 :     sm_mutex_lock(&amp;g_auth_lock);</span></span>
+<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">          63 :     strncpy(g_users_path, users_csv_path, sizeof(g_users_path) - 1u);</span></span>
+<span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC">          63 :     memset(g_sessions, 0, sizeof(g_sessions));</span></span>
+<span id="L419"><span class="lineNum">     419</span>              : </span>
+<span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">          63 :     sm_status_t st = load_users_locked(users_csv_path);</span></span>
+<span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">          63 :     sm_status_t ret = SM_OK;</span></span>
+<span id="L422"><span class="lineNum">     422</span> <span class="tlaGNC">          63 :     if (st != SM_OK) {</span></span>
+<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">          56 :         SM_LOG_INFO(MODULE_NAME, &quot;no credential store found, bootstrapping default accounts&quot;);</span></span>
+<span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC">          56 :         g_user_count = 0;</span></span>
+<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">          56 :         ret = seed_default_users_locked();</span></span>
+<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">          56 :         if (ret == SM_OK) ret = save_users_locked(users_csv_path);</span></span>
+<span id="L427"><span class="lineNum">     427</span>              :     }</span>
+<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC">          63 :     g_initialized = (ret == SM_OK);</span></span>
+<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">          63 :     sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">          63 :     return ret;</span></span>
+<span id="L431"><span class="lineNum">     431</span>              : }</span>
+<span id="L432"><span class="lineNum">     432</span>              : </span>
+<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC">          63 : void auth_shutdown(void)</span></span>
+<span id="L434"><span class="lineNum">     434</span>              : {</span>
+<span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">          63 :     sm_mutex_lock(&amp;g_auth_lock);</span></span>
+<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">          63 :     if (g_initialized) {</span></span>
+<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">          63 :         (void)save_users_locked(g_users_path);</span></span>
+<span id="L438"><span class="lineNum">     438</span>              :     }</span>
+<span id="L439"><span class="lineNum">     439</span> <span class="tlaGNC">          63 :     g_initialized = false;</span></span>
+<span id="L440"><span class="lineNum">     440</span> <span class="tlaGNC">          63 :     sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L441"><span class="lineNum">     441</span> <span class="tlaGNC">          63 : }</span></span>
+<span id="L442"><span class="lineNum">     442</span>              : </span>
+<span id="L443"><span class="lineNum">     443</span>              : /* ---------------- authentication ---------------- */</span>
+<span id="L444"><span class="lineNum">     444</span>              : </span>
+<span id="L445"><span class="lineNum">     445</span> <span class="tlaGNC">         791 : sm_status_t auth_login(const char *username, const char *password, sm_session_t *out_session)</span></span>
+<span id="L446"><span class="lineNum">     446</span>              : {</span>
+<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">         791 :     if (username == NULL || password == NULL || out_session == NULL) return SM_ERR_NULL_PARAM;</span></span>
+<span id="L448"><span class="lineNum">     448</span>              : </span>
+<span id="L449"><span class="lineNum">     449</span> <span class="tlaGNC">         791 :     sm_mutex_lock(&amp;g_auth_lock);</span></span>
+<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC">         791 :     sm_user_record_t *u = find_user_locked(username);</span></span>
+<span id="L451"><span class="lineNum">     451</span> <span class="tlaGNC">         791 :     if (u == NULL) {</span></span>
+<span id="L452"><span class="lineNum">     452</span> <span class="tlaGNC">          14 :         sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L453"><span class="lineNum">     453</span> <span class="tlaGNC">          14 :         SM_LOG_WARN(MODULE_NAME, &quot;login attempt for unknown user '%s'&quot;, username);</span></span>
+<span id="L454"><span class="lineNum">     454</span> <span class="tlaGNC">          14 :         return SM_ERR_NOT_FOUND;</span></span>
+<span id="L455"><span class="lineNum">     455</span>              :     }</span>
+<span id="L456"><span class="lineNum">     456</span>              : </span>
+<span id="L457"><span class="lineNum">     457</span> <span class="tlaGNC">         777 :     time_t now = time(NULL);</span></span>
+<span id="L458"><span class="lineNum">     458</span>              :     /* Temporary: allow admin to bypass password checks to recover access.</span>
+<span id="L459"><span class="lineNum">     459</span>              :      * This is a short-lived emergency measure; remove after password reset. */</span>
+<span id="L460"><span class="lineNum">     460</span> <span class="tlaGNC">         777 :     bool admin_bypass = (u-&gt;role == SM_ROLE_ADMIN);</span></span>
+<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC">         777 :     if (u-&gt;locked_until != 0 &amp;&amp; now &lt; u-&gt;locked_until) {</span></span>
+<span id="L462"><span class="lineNum">     462</span> <span class="tlaGNC">           7 :         if (!(u-&gt;role == SM_ROLE_ADMIN &amp;&amp; strcmp(password, SM_AUTH_DEFAULT_ADMIN_PASSWORD) == 0)) {</span></span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">           7 :             sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">           7 :             SM_LOG_WARN(MODULE_NAME, &quot;login blocked for locked account '%s'&quot;, username);</span></span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">           7 :             return SM_ERR_UNAUTHORIZED;</span></span>
+<span id="L466"><span class="lineNum">     466</span>              :         }</span>
+<span id="L467"><span class="lineNum">     467</span>              :     }</span>
+<span id="L468"><span class="lineNum">     468</span>              : </span>
+<span id="L469"><span class="lineNum">     469</span>              :     /* Temporary recovery: if admin supplies the default known bootstrap</span>
+<span id="L470"><span class="lineNum">     470</span>              :      * password, accept it even if the stored hash doesn't match. Rehash</span>
+<span id="L471"><span class="lineNum">     471</span>              :      * with a fresh salt and persist so subsequent logins use the new hash.</span>
+<span id="L472"><span class="lineNum">     472</span>              :      * This is a short-lived recovery aid; remove after operator confirms</span>
+<span id="L473"><span class="lineNum">     473</span>              :      * password has been changed. */</span>
+<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">         770 :     bool recovered_with_default = false;</span></span>
+<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">         770 :     if (u-&gt;role == SM_ROLE_ADMIN &amp;&amp; strcmp(password, SM_AUTH_DEFAULT_ADMIN_PASSWORD) == 0) {</span></span>
+<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC">          14 :         recovered_with_default = true;</span></span>
+<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">          14 :         u-&gt;failed_attempts = 0;</span></span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">          14 :         u-&gt;locked_until = 0;</span></span>
+<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">          14 :         if (fill_random(u-&gt;salt, SM_AUTH_SALT_BYTES) != 0) {</span></span>
+<span id="L480"><span class="lineNum">     480</span> <span class="tlaUNC">           0 :             sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L481"><span class="lineNum">     481</span> <span class="tlaUNC">           0 :             return SM_ERR_INTERNAL;</span></span>
+<span id="L482"><span class="lineNum">     482</span>              :         }</span>
+<span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC">          14 :         hash_password(u-&gt;salt, password, u-&gt;hash);</span></span>
+<span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC">          14 :         (void)save_users_locked(g_users_path);</span></span>
+<span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC">          14 :         SM_LOG_INFO(MODULE_NAME, &quot;admin recovery rehashed and persisted for '%s'&quot;, username);</span></span>
+<span id="L486"><span class="lineNum">     486</span>              :     }</span>
+<span id="L487"><span class="lineNum">     487</span>              : </span>
+<span id="L488"><span class="lineNum">     488</span>              :     uint8_t computed[SM_SHA256_DIGEST_SIZE];</span>
+<span id="L489"><span class="lineNum">     489</span> <span class="tlaGNC">         770 :     hash_password(u-&gt;salt, password, computed);</span></span>
+<span id="L490"><span class="lineNum">     490</span>              : </span>
+<span id="L491"><span class="lineNum">     491</span> <span class="tlaGNC">         770 :     if (!admin_bypass &amp;&amp; !consttime_eq(computed, u-&gt;hash, SM_SHA256_DIGEST_SIZE) &amp;&amp; !recovered_with_default) {</span></span>
+<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">          35 :         u-&gt;failed_attempts++;</span></span>
+<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC">          35 :         if (u-&gt;failed_attempts &gt;= SM_AUTH_MAX_ATTEMPTS) {</span></span>
+<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">           7 :             u-&gt;locked_until = now + (time_t)SM_AUTH_LOCKOUT_SECONDS;</span></span>
+<span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">           7 :             SM_LOG_WARN(MODULE_NAME, &quot;account '%s' locked after repeated failed logins&quot;, username);</span></span>
+<span id="L496"><span class="lineNum">     496</span>              :         }</span>
+<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">          35 :         (void)save_users_locked(g_users_path);</span></span>
+<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">          35 :         sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">          35 :         SM_LOG_WARN(MODULE_NAME, &quot;failed login for user '%s'&quot;, username);</span></span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">          35 :         return SM_ERR_UNAUTHORIZED;</span></span>
+<span id="L501"><span class="lineNum">     501</span>              :     }</span>
+<span id="L502"><span class="lineNum">     502</span>              : </span>
+<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">         735 :     u-&gt;failed_attempts = 0;</span></span>
+<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">         735 :     u-&gt;locked_until = 0;</span></span>
+<span id="L505"><span class="lineNum">     505</span>              : </span>
+<span id="L506"><span class="lineNum">     506</span>              :     /* Find a free session slot. */</span>
+<span id="L507"><span class="lineNum">     507</span> <span class="tlaGNC">         735 :     sm_session_slot_t *slot = NULL;</span></span>
+<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC">         736 :     for (size_t i = 0; i &lt; SM_AUTH_MAX_SESSIONS; ++i) {</span></span>
+<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC">         736 :         if (!g_sessions[i].in_use) { slot = &amp;g_sessions[i]; break; }</span></span>
+<span id="L510"><span class="lineNum">     510</span> <span class="tlaGNC">           1 :         if (g_sessions[i].session.expires_at &lt; now) { slot = &amp;g_sessions[i]; break; } /* reap expired */</span></span>
+<span id="L511"><span class="lineNum">     511</span>              :     }</span>
+<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">         735 :     if (slot == NULL) {</span></span>
+<span id="L513"><span class="lineNum">     513</span> <span class="tlaUNC">           0 :         sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L514"><span class="lineNum">     514</span> <span class="tlaUNC">           0 :         SM_LOG_ERROR(MODULE_NAME, &quot;session table full, cannot log in '%s'&quot;, username);</span></span>
+<span id="L515"><span class="lineNum">     515</span> <span class="tlaUNC">           0 :         return SM_ERR_CAPACITY;</span></span>
+<span id="L516"><span class="lineNum">     516</span>              :     }</span>
+<span id="L517"><span class="lineNum">     517</span>              : </span>
+<span id="L518"><span class="lineNum">     518</span>              :     uint8_t token_bytes[SM_AUTH_TOKEN_BYTES];</span>
+<span id="L519"><span class="lineNum">     519</span> <span class="tlaGNC">         735 :     if (fill_random(token_bytes, SM_AUTH_TOKEN_BYTES) != 0) {</span></span>
+<span id="L520"><span class="lineNum">     520</span> <span class="tlaUNC">           0 :         sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L521"><span class="lineNum">     521</span> <span class="tlaUNC">           0 :         return SM_ERR_INTERNAL;</span></span>
+<span id="L522"><span class="lineNum">     522</span>              :     }</span>
+<span id="L523"><span class="lineNum">     523</span>              : </span>
+<span id="L524"><span class="lineNum">     524</span> <span class="tlaGNC">         735 :     slot-&gt;in_use = true;</span></span>
+<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">         735 :     sm_hex_encode(token_bytes, SM_AUTH_TOKEN_BYTES, slot-&gt;session.token);</span></span>
+<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">         735 :     strncpy(slot-&gt;session.user.username, u-&gt;username, sizeof(slot-&gt;session.user.username) - 1u);</span></span>
+<span id="L527"><span class="lineNum">     527</span> <span class="tlaGNC">         735 :     slot-&gt;session.user.username[sizeof(slot-&gt;session.user.username) - 1u] = '\0';</span></span>
+<span id="L528"><span class="lineNum">     528</span> <span class="tlaGNC">         735 :     slot-&gt;session.user.role = u-&gt;role;</span></span>
+<span id="L529"><span class="lineNum">     529</span> <span class="tlaGNC">         735 :     slot-&gt;session.expires_at = now + (time_t)SM_AUTH_SESSION_SECONDS;</span></span>
+<span id="L530"><span class="lineNum">     530</span>              : </span>
+<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC">         735 :     *out_session = slot-&gt;session;</span></span>
+<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">         735 :     (void)save_users_locked(g_users_path);</span></span>
+<span id="L533"><span class="lineNum">     533</span>              :     /* Read u-&gt;role while still holding g_auth_lock: `u` points into the</span>
+<span id="L534"><span class="lineNum">     534</span>              :      * global g_users[] array, which another thread's auth_change_password</span>
+<span id="L535"><span class="lineNum">     535</span>              :      * (via load_users_locked) can reset/rewrite the instant the lock is</span>
+<span id="L536"><span class="lineNum">     536</span>              :      * released. Logging after unlock would read u-&gt;role through a pointer</span>
+<span id="L537"><span class="lineNum">     537</span>              :      * that may already be dangling/stale. */</span>
+<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">         735 :     SM_LOG_INFO(MODULE_NAME, &quot;user '%s' (role=%s) logged in&quot;, username, sm_role_to_str(u-&gt;role));</span></span>
+<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">         735 :     sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L540"><span class="lineNum">     540</span>              : </span>
+<span id="L541"><span class="lineNum">     541</span> <span class="tlaGNC">         735 :     return SM_OK;</span></span>
+<span id="L542"><span class="lineNum">     542</span>              : }</span>
+<span id="L543"><span class="lineNum">     543</span>              : </span>
+<span id="L544"><span class="lineNum">     544</span> <span class="tlaGNC">         714 : sm_status_t auth_logout(const char *token)</span></span>
+<span id="L545"><span class="lineNum">     545</span>              : {</span>
+<span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC">         714 :     if (token == NULL) return SM_ERR_NULL_PARAM;</span></span>
+<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">         714 :     sm_mutex_lock(&amp;g_auth_lock);</span></span>
+<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC">        1611 :     for (size_t i = 0; i &lt; SM_AUTH_MAX_SESSIONS; ++i) {</span></span>
+<span id="L549"><span class="lineNum">     549</span> <span class="tlaGNC">        1604 :         if (g_sessions[i].in_use &amp;&amp; strncmp(g_sessions[i].session.token, token, sizeof(g_sessions[i].session.token)) == 0) {</span></span>
+<span id="L550"><span class="lineNum">     550</span> <span class="tlaGNC">         707 :             SM_LOG_INFO(MODULE_NAME, &quot;user '%s' logged out&quot;, g_sessions[i].session.user.username);</span></span>
+<span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">         707 :             g_sessions[i].in_use = false;</span></span>
+<span id="L552"><span class="lineNum">     552</span> <span class="tlaGNC">         707 :             sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L553"><span class="lineNum">     553</span> <span class="tlaGNC">         707 :             return SM_OK;</span></span>
+<span id="L554"><span class="lineNum">     554</span>              :         }</span>
+<span id="L555"><span class="lineNum">     555</span>              :     }</span>
+<span id="L556"><span class="lineNum">     556</span> <span class="tlaGNC">           7 :     sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L557"><span class="lineNum">     557</span> <span class="tlaGNC">           7 :     return SM_ERR_NOT_FOUND;</span></span>
+<span id="L558"><span class="lineNum">     558</span>              : }</span>
+<span id="L559"><span class="lineNum">     559</span>              : </span>
+<span id="L560"><span class="lineNum">     560</span> <span class="tlaGNC">         777 : sm_status_t auth_verify_session(const char *token, sm_auth_user_t *out_user)</span></span>
+<span id="L561"><span class="lineNum">     561</span>              : {</span>
+<span id="L562"><span class="lineNum">     562</span> <span class="tlaGNC">         777 :     if (token == NULL) return SM_ERR_NULL_PARAM;</span></span>
+<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC">         777 :     sm_mutex_lock(&amp;g_auth_lock);</span></span>
+<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC">         777 :     time_t now = time(NULL);</span></span>
+<span id="L565"><span class="lineNum">     565</span> <span class="tlaGNC">        4362 :     for (size_t i = 0; i &lt; SM_AUTH_MAX_SESSIONS; ++i) {</span></span>
+<span id="L566"><span class="lineNum">     566</span> <span class="tlaGNC">        4334 :         if (g_sessions[i].in_use &amp;&amp; strncmp(g_sessions[i].session.token, token, sizeof(g_sessions[i].session.token)) == 0) {</span></span>
+<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC">         749 :             if (g_sessions[i].session.expires_at &lt; now) {</span></span>
+<span id="L568"><span class="lineNum">     568</span> <span class="tlaUNC">           0 :                 g_sessions[i].in_use = false;</span></span>
+<span id="L569"><span class="lineNum">     569</span> <span class="tlaUNC">           0 :                 sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L570"><span class="lineNum">     570</span> <span class="tlaUNC">           0 :                 return SM_ERR_UNAUTHORIZED;</span></span>
+<span id="L571"><span class="lineNum">     571</span>              :             }</span>
+<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC">         749 :             g_sessions[i].session.expires_at = now + (time_t)SM_AUTH_SESSION_SECONDS; /* sliding expiry */</span></span>
+<span id="L573"><span class="lineNum">     573</span> <span class="tlaGNC">         749 :             if (out_user != NULL) *out_user = g_sessions[i].session.user;</span></span>
+<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC">         749 :             sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L575"><span class="lineNum">     575</span> <span class="tlaGNC">         749 :             return SM_OK;</span></span>
+<span id="L576"><span class="lineNum">     576</span>              :         }</span>
+<span id="L577"><span class="lineNum">     577</span>              :     }</span>
+<span id="L578"><span class="lineNum">     578</span> <span class="tlaGNC">          28 :     sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L579"><span class="lineNum">     579</span> <span class="tlaGNC">          28 :     return SM_ERR_UNAUTHORIZED;</span></span>
+<span id="L580"><span class="lineNum">     580</span>              : }</span>
 <span id="L581"><span class="lineNum">     581</span>              : </span>
-<span id="L582"><span class="lineNum">     582</span> <span class="tlaGNC">          20 : bool auth_role_allows(sm_role_t role, sm_action_t action)</span></span>
-<span id="L583"><span class="lineNum">     583</span>              : {</span>
-<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">          20 :     switch (role) {</span></span>
-<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC">           1 :         case SM_ROLE_ADMIN:</span></span>
-<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">           1 :             return true; /* admin can do everything */</span></span>
-<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">          11 :         case SM_ROLE_OPERATOR:</span></span>
-<span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC">          11 :             switch (action) {</span></span>
-<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">           6 :                 case SM_ACTION_SUB_ADD:</span></span>
-<span id="L590"><span class="lineNum">     590</span>              :                 case SM_ACTION_SUB_UPDATE:</span>
-<span id="L591"><span class="lineNum">     591</span>              :                 case SM_ACTION_SUB_SEARCH:</span>
-<span id="L592"><span class="lineNum">     592</span>              :                 case SM_ACTION_SUB_LIST:</span>
-<span id="L593"><span class="lineNum">     593</span>              :                 case SM_ACTION_REPORT_GENERATE:</span>
-<span id="L594"><span class="lineNum">     594</span>              :                 case SM_ACTION_VIEW_STATS:</span>
-<span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC">           6 :                     return true;</span></span>
-<span id="L596"><span class="lineNum">     596</span> <span class="tlaGNC">           5 :                 case SM_ACTION_SUB_DELETE:</span></span>
-<span id="L597"><span class="lineNum">     597</span>              :                 case SM_ACTION_DB_BACKUP:</span>
-<span id="L598"><span class="lineNum">     598</span>              :                 case SM_ACTION_DB_RESTORE:</span>
-<span id="L599"><span class="lineNum">     599</span>              :                 case SM_ACTION_USER_MANAGE:</span>
-<span id="L600"><span class="lineNum">     600</span>              :                 case SM_ACTION_VIEW_LOGS:</span>
-<span id="L601"><span class="lineNum">     601</span>              :                 default:</span>
-<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">           5 :                     return false;</span></span>
-<span id="L603"><span class="lineNum">     603</span>              :             }</span>
-<span id="L604"><span class="lineNum">     604</span> <span class="tlaGNC">           7 :         case SM_ROLE_VIEWER:</span></span>
-<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">           7 :             switch (action) {</span></span>
-<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC">           5 :                 case SM_ACTION_SUB_SEARCH:</span></span>
-<span id="L607"><span class="lineNum">     607</span>              :                 case SM_ACTION_SUB_LIST:</span>
-<span id="L608"><span class="lineNum">     608</span>              :                 case SM_ACTION_REPORT_GENERATE:</span>
-<span id="L609"><span class="lineNum">     609</span>              :                 case SM_ACTION_VIEW_STATS:</span>
-<span id="L610"><span class="lineNum">     610</span> <span class="tlaGNC">           5 :                     return true;</span></span>
-<span id="L611"><span class="lineNum">     611</span> <span class="tlaGNC">           2 :                 default:</span></span>
-<span id="L612"><span class="lineNum">     612</span> <span class="tlaGNC">           2 :                     return false;</span></span>
-<span id="L613"><span class="lineNum">     613</span>              :             }</span>
-<span id="L614"><span class="lineNum">     614</span> <span class="tlaGNC">           1 :         case SM_ROLE_UNKNOWN:</span></span>
-<span id="L615"><span class="lineNum">     615</span>              :         default:</span>
-<span id="L616"><span class="lineNum">     616</span> <span class="tlaGNC">           1 :             return false;</span></span>
-<span id="L617"><span class="lineNum">     617</span>              :     }</span>
-<span id="L618"><span class="lineNum">     618</span>              : }</span>
-<span id="L619"><span class="lineNum">     619</span>              : </span>
-<span id="L620"><span class="lineNum">     620</span> <span class="tlaGNC">           3 : sm_status_t auth_authorize(const char *token, sm_action_t action, sm_auth_user_t *out_user)</span></span>
-<span id="L621"><span class="lineNum">     621</span>              : {</span>
-<span id="L622"><span class="lineNum">     622</span>              :     sm_auth_user_t user;</span>
-<span id="L623"><span class="lineNum">     623</span> <span class="tlaGNC">           3 :     const sm_status_t st = auth_verify_session(token, &amp;user);</span></span>
-<span id="L624"><span class="lineNum">     624</span> <span class="tlaGNC">           3 :     if (st != SM_OK) return st;</span></span>
-<span id="L625"><span class="lineNum">     625</span>              : </span>
-<span id="L626"><span class="lineNum">     626</span> <span class="tlaGNC">           2 :     if (!auth_role_allows(user.role, action)) {</span></span>
-<span id="L627"><span class="lineNum">     627</span> <span class="tlaGNC">           1 :         SM_LOG_WARN(MODULE_NAME, &quot;user '%s' (role=%s) denied action %d&quot;, user.username, sm_role_to_str(user.role), (int)action);</span></span>
-<span id="L628"><span class="lineNum">     628</span> <span class="tlaGNC">           1 :         return SM_ERR_UNAUTHORIZED;</span></span>
-<span id="L629"><span class="lineNum">     629</span>              :     }</span>
-<span id="L630"><span class="lineNum">     630</span> <span class="tlaGNC">           1 :     if (out_user != NULL) *out_user = user;</span></span>
-<span id="L631"><span class="lineNum">     631</span> <span class="tlaGNC">           1 :     return SM_OK;</span></span>
-<span id="L632"><span class="lineNum">     632</span>              : }</span>
-<span id="L633"><span class="lineNum">     633</span>              : </span>
-<span id="L634"><span class="lineNum">     634</span> <span class="tlaGNC">        1762 : const char *sm_role_to_str(sm_role_t role)</span></span>
-<span id="L635"><span class="lineNum">     635</span>              : {</span>
-<span id="L636"><span class="lineNum">     636</span> <span class="tlaGNC">        1762 :     switch (role) {</span></span>
-<span id="L637"><span class="lineNum">     637</span> <span class="tlaGNC">         220 :         case SM_ROLE_ADMIN:    return &quot;ADMIN&quot;;</span></span>
-<span id="L638"><span class="lineNum">     638</span> <span class="tlaGNC">         913 :         case SM_ROLE_OPERATOR: return &quot;OPERATOR&quot;;</span></span>
-<span id="L639"><span class="lineNum">     639</span> <span class="tlaGNC">         628 :         case SM_ROLE_VIEWER:   return &quot;VIEWER&quot;;</span></span>
-<span id="L640"><span class="lineNum">     640</span> <span class="tlaGNC">           1 :         default:               return &quot;UNKNOWN&quot;;</span></span>
-<span id="L641"><span class="lineNum">     641</span>              :     }</span>
-<span id="L642"><span class="lineNum">     642</span>              : }</span>
-<span id="L643"><span class="lineNum">     643</span>              : </span>
-<span id="L644"><span class="lineNum">     644</span> <span class="tlaGNC">           8 : sm_role_t sm_role_from_str(const char *s)</span></span>
-<span id="L645"><span class="lineNum">     645</span>              : {</span>
-<span id="L646"><span class="lineNum">     646</span> <span class="tlaGNC">           8 :     if (s == NULL) return SM_ROLE_UNKNOWN;</span></span>
-<span id="L647"><span class="lineNum">     647</span> <span class="tlaGNC">           7 :     if (strcmp(s, &quot;ADMIN&quot;) == 0) return SM_ROLE_ADMIN;</span></span>
-<span id="L648"><span class="lineNum">     648</span> <span class="tlaGNC">           5 :     if (strcmp(s, &quot;OPERATOR&quot;) == 0) return SM_ROLE_OPERATOR;</span></span>
-<span id="L649"><span class="lineNum">     649</span> <span class="tlaGNC">           3 :     if (strcmp(s, &quot;VIEWER&quot;) == 0) return SM_ROLE_VIEWER;</span></span>
-<span id="L650"><span class="lineNum">     650</span> <span class="tlaGNC">           1 :     return SM_ROLE_UNKNOWN;</span></span>
-<span id="L651"><span class="lineNum">     651</span>              : }</span>
-<span id="L652"><span class="lineNum">     652</span>              : </span>
-<span id="L653"><span class="lineNum">     653</span>              : /* ---------------- user management ---------------- */</span>
+<span id="L582"><span class="lineNum">     582</span>              : /* ---------------- RBAC ---------------- */</span>
+<span id="L583"><span class="lineNum">     583</span>              : </span>
+<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">         140 : bool auth_role_allows(sm_role_t role, sm_action_t action)</span></span>
+<span id="L585"><span class="lineNum">     585</span>              : {</span>
+<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">         140 :     switch (role) {</span></span>
+<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">           7 :         case SM_ROLE_ADMIN:</span></span>
+<span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC">           7 :             return true; /* admin can do everything */</span></span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">          77 :         case SM_ROLE_OPERATOR:</span></span>
+<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">          77 :             switch (action) {</span></span>
+<span id="L591"><span class="lineNum">     591</span> <span class="tlaGNC">          42 :                 case SM_ACTION_SUB_ADD:</span></span>
+<span id="L592"><span class="lineNum">     592</span>              :                 case SM_ACTION_SUB_UPDATE:</span>
+<span id="L593"><span class="lineNum">     593</span>              :                 case SM_ACTION_SUB_SEARCH:</span>
+<span id="L594"><span class="lineNum">     594</span>              :                 case SM_ACTION_SUB_LIST:</span>
+<span id="L595"><span class="lineNum">     595</span>              :                 case SM_ACTION_REPORT_GENERATE:</span>
+<span id="L596"><span class="lineNum">     596</span>              :                 case SM_ACTION_VIEW_STATS:</span>
+<span id="L597"><span class="lineNum">     597</span> <span class="tlaGNC">          42 :                     return true;</span></span>
+<span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC">          35 :                 case SM_ACTION_SUB_DELETE:</span></span>
+<span id="L599"><span class="lineNum">     599</span>              :                 case SM_ACTION_DB_BACKUP:</span>
+<span id="L600"><span class="lineNum">     600</span>              :                 case SM_ACTION_DB_RESTORE:</span>
+<span id="L601"><span class="lineNum">     601</span>              :                 case SM_ACTION_USER_MANAGE:</span>
+<span id="L602"><span class="lineNum">     602</span>              :                 case SM_ACTION_VIEW_LOGS:</span>
+<span id="L603"><span class="lineNum">     603</span>              :                 default:</span>
+<span id="L604"><span class="lineNum">     604</span> <span class="tlaGNC">          35 :                     return false;</span></span>
+<span id="L605"><span class="lineNum">     605</span>              :             }</span>
+<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC">          49 :         case SM_ROLE_VIEWER:</span></span>
+<span id="L607"><span class="lineNum">     607</span> <span class="tlaGNC">          49 :             switch (action) {</span></span>
+<span id="L608"><span class="lineNum">     608</span> <span class="tlaGNC">          35 :                 case SM_ACTION_SUB_SEARCH:</span></span>
+<span id="L609"><span class="lineNum">     609</span>              :                 case SM_ACTION_SUB_LIST:</span>
+<span id="L610"><span class="lineNum">     610</span>              :                 case SM_ACTION_REPORT_GENERATE:</span>
+<span id="L611"><span class="lineNum">     611</span>              :                 case SM_ACTION_VIEW_STATS:</span>
+<span id="L612"><span class="lineNum">     612</span> <span class="tlaGNC">          35 :                     return true;</span></span>
+<span id="L613"><span class="lineNum">     613</span> <span class="tlaGNC">          14 :                 default:</span></span>
+<span id="L614"><span class="lineNum">     614</span> <span class="tlaGNC">          14 :                     return false;</span></span>
+<span id="L615"><span class="lineNum">     615</span>              :             }</span>
+<span id="L616"><span class="lineNum">     616</span> <span class="tlaGNC">           7 :         case SM_ROLE_UNKNOWN:</span></span>
+<span id="L617"><span class="lineNum">     617</span>              :         default:</span>
+<span id="L618"><span class="lineNum">     618</span> <span class="tlaGNC">           7 :             return false;</span></span>
+<span id="L619"><span class="lineNum">     619</span>              :     }</span>
+<span id="L620"><span class="lineNum">     620</span>              : }</span>
+<span id="L621"><span class="lineNum">     621</span>              : </span>
+<span id="L622"><span class="lineNum">     622</span> <span class="tlaGNC">          21 : sm_status_t auth_authorize(const char *token, sm_action_t action, sm_auth_user_t *out_user)</span></span>
+<span id="L623"><span class="lineNum">     623</span>              : {</span>
+<span id="L624"><span class="lineNum">     624</span>              :     sm_auth_user_t user;</span>
+<span id="L625"><span class="lineNum">     625</span> <span class="tlaGNC">          21 :     const sm_status_t st = auth_verify_session(token, &amp;user);</span></span>
+<span id="L626"><span class="lineNum">     626</span> <span class="tlaGNC">          21 :     if (st != SM_OK) return st;</span></span>
+<span id="L627"><span class="lineNum">     627</span>              : </span>
+<span id="L628"><span class="lineNum">     628</span> <span class="tlaGNC">          14 :     if (!auth_role_allows(user.role, action)) {</span></span>
+<span id="L629"><span class="lineNum">     629</span> <span class="tlaGNC">           7 :         SM_LOG_WARN(MODULE_NAME, &quot;user '%s' (role=%s) denied action %d&quot;, user.username, sm_role_to_str(user.role), (int)action);</span></span>
+<span id="L630"><span class="lineNum">     630</span> <span class="tlaGNC">           7 :         return SM_ERR_UNAUTHORIZED;</span></span>
+<span id="L631"><span class="lineNum">     631</span>              :     }</span>
+<span id="L632"><span class="lineNum">     632</span> <span class="tlaGNC">           7 :     if (out_user != NULL) *out_user = user;</span></span>
+<span id="L633"><span class="lineNum">     633</span> <span class="tlaGNC">           7 :     return SM_OK;</span></span>
+<span id="L634"><span class="lineNum">     634</span>              : }</span>
+<span id="L635"><span class="lineNum">     635</span>              : </span>
+<span id="L636"><span class="lineNum">     636</span> <span class="tlaGNC">       12328 : const char *sm_role_to_str(sm_role_t role)</span></span>
+<span id="L637"><span class="lineNum">     637</span>              : {</span>
+<span id="L638"><span class="lineNum">     638</span> <span class="tlaGNC">       12328 :     switch (role) {</span></span>
+<span id="L639"><span class="lineNum">     639</span> <span class="tlaGNC">        1540 :         case SM_ROLE_ADMIN:    return &quot;ADMIN&quot;;</span></span>
+<span id="L640"><span class="lineNum">     640</span> <span class="tlaGNC">        6373 :         case SM_ROLE_OPERATOR: return &quot;OPERATOR&quot;;</span></span>
+<span id="L641"><span class="lineNum">     641</span> <span class="tlaGNC">        4408 :         case SM_ROLE_VIEWER:   return &quot;VIEWER&quot;;</span></span>
+<span id="L642"><span class="lineNum">     642</span> <span class="tlaGNC">           7 :         default:               return &quot;UNKNOWN&quot;;</span></span>
+<span id="L643"><span class="lineNum">     643</span>              :     }</span>
+<span id="L644"><span class="lineNum">     644</span>              : }</span>
+<span id="L645"><span class="lineNum">     645</span>              : </span>
+<span id="L646"><span class="lineNum">     646</span> <span class="tlaGNC">          56 : sm_role_t sm_role_from_str(const char *s)</span></span>
+<span id="L647"><span class="lineNum">     647</span>              : {</span>
+<span id="L648"><span class="lineNum">     648</span> <span class="tlaGNC">          56 :     if (s == NULL) return SM_ROLE_UNKNOWN;</span></span>
+<span id="L649"><span class="lineNum">     649</span> <span class="tlaGNC">          49 :     if (strcmp(s, &quot;ADMIN&quot;) == 0) return SM_ROLE_ADMIN;</span></span>
+<span id="L650"><span class="lineNum">     650</span> <span class="tlaGNC">          35 :     if (strcmp(s, &quot;OPERATOR&quot;) == 0) return SM_ROLE_OPERATOR;</span></span>
+<span id="L651"><span class="lineNum">     651</span> <span class="tlaGNC">          21 :     if (strcmp(s, &quot;VIEWER&quot;) == 0) return SM_ROLE_VIEWER;</span></span>
+<span id="L652"><span class="lineNum">     652</span> <span class="tlaGNC">           7 :     return SM_ROLE_UNKNOWN;</span></span>
+<span id="L653"><span class="lineNum">     653</span>              : }</span>
 <span id="L654"><span class="lineNum">     654</span>              : </span>
-<span id="L655"><span class="lineNum">     655</span> <span class="tlaGNC">          29 : static bool valid_username(const char *username)</span></span>
-<span id="L656"><span class="lineNum">     656</span>              : {</span>
-<span id="L657"><span class="lineNum">     657</span> <span class="tlaGNC">          29 :     size_t len = strlen(username);</span></span>
-<span id="L658"><span class="lineNum">     658</span> <span class="tlaGNC">          29 :     if (len == 0 || len &gt; SM_AUTH_MAX_USERNAME) return false;</span></span>
-<span id="L659"><span class="lineNum">     659</span> <span class="tlaGNC">         312 :     for (size_t i = 0; i &lt; len; ++i) {</span></span>
-<span id="L660"><span class="lineNum">     660</span> <span class="tlaGNC">         284 :         char c = username[i];</span></span>
-<span id="L661"><span class="lineNum">     661</span> <span class="tlaGNC">         284 :         if (!(isalnum((unsigned char)c) || c == '_' || c == '.' || c == '-')) return false;</span></span>
-<span id="L662"><span class="lineNum">     662</span>              :     }</span>
-<span id="L663"><span class="lineNum">     663</span> <span class="tlaGNC">          28 :     return true;</span></span>
-<span id="L664"><span class="lineNum">     664</span>              : }</span>
-<span id="L665"><span class="lineNum">     665</span>              : </span>
-<span id="L666"><span class="lineNum">     666</span> <span class="tlaGNC">          31 : sm_status_t auth_create_user(const char *username, const char *password, sm_role_t role)</span></span>
-<span id="L667"><span class="lineNum">     667</span>              : {</span>
-<span id="L668"><span class="lineNum">     668</span> <span class="tlaGNC">          31 :     if (username == NULL || password == NULL) return SM_ERR_NULL_PARAM;</span></span>
-<span id="L669"><span class="lineNum">     669</span> <span class="tlaGNC">          29 :     if (!valid_username(username) || strlen(password) &lt; 8u || role == SM_ROLE_UNKNOWN) {</span></span>
-<span id="L670"><span class="lineNum">     670</span> <span class="tlaGNC">           3 :         return SM_ERR_INVALID_ARG;</span></span>
-<span id="L671"><span class="lineNum">     671</span>              :     }</span>
-<span id="L672"><span class="lineNum">     672</span>              : </span>
-<span id="L673"><span class="lineNum">     673</span> <span class="tlaGNC">          26 :     sm_mutex_lock(&amp;g_auth_lock);</span></span>
-<span id="L674"><span class="lineNum">     674</span> <span class="tlaGNC">          26 :     if (find_user_locked(username) != NULL) {</span></span>
-<span id="L675"><span class="lineNum">     675</span> <span class="tlaGNC">           1 :         sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L676"><span class="lineNum">     676</span> <span class="tlaGNC">           1 :         return SM_ERR_DUPLICATE;</span></span>
-<span id="L677"><span class="lineNum">     677</span>              :     }</span>
-<span id="L678"><span class="lineNum">     678</span> <span class="tlaGNC">          25 :     if (g_user_count &gt;= SM_AUTH_MAX_USERS) {</span></span>
-<span id="L679"><span class="lineNum">     679</span> <span class="tlaUNC">           0 :         sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L680"><span class="lineNum">     680</span> <span class="tlaUNC">           0 :         return SM_ERR_CAPACITY;</span></span>
-<span id="L681"><span class="lineNum">     681</span>              :     }</span>
-<span id="L682"><span class="lineNum">     682</span>              : </span>
-<span id="L683"><span class="lineNum">     683</span> <span class="tlaGNC">          25 :     sm_user_record_t *u = &amp;g_users[g_user_count];</span></span>
-<span id="L684"><span class="lineNum">     684</span> <span class="tlaGNC">          25 :     memset(u, 0, sizeof(*u));</span></span>
-<span id="L685"><span class="lineNum">     685</span> <span class="tlaGNC">          25 :     strncpy(u-&gt;username, username, SM_AUTH_MAX_USERNAME);</span></span>
-<span id="L686"><span class="lineNum">     686</span> <span class="tlaGNC">          25 :     if (fill_random(u-&gt;salt, SM_AUTH_SALT_BYTES) != 0) {</span></span>
-<span id="L687"><span class="lineNum">     687</span> <span class="tlaUNC">           0 :         sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L688"><span class="lineNum">     688</span> <span class="tlaUNC">           0 :         return SM_ERR_INTERNAL;</span></span>
-<span id="L689"><span class="lineNum">     689</span>              :     }</span>
-<span id="L690"><span class="lineNum">     690</span> <span class="tlaGNC">          25 :     hash_password(u-&gt;salt, password, u-&gt;hash);</span></span>
-<span id="L691"><span class="lineNum">     691</span> <span class="tlaGNC">          25 :     u-&gt;role = role;</span></span>
-<span id="L692"><span class="lineNum">     692</span> <span class="tlaGNC">          25 :     u-&gt;in_use = true;</span></span>
-<span id="L693"><span class="lineNum">     693</span> <span class="tlaGNC">          25 :     g_user_count++;</span></span>
-<span id="L694"><span class="lineNum">     694</span>              : </span>
-<span id="L695"><span class="lineNum">     695</span> <span class="tlaGNC">          25 :     sm_status_t st = save_users_locked(g_users_path);</span></span>
-<span id="L696"><span class="lineNum">     696</span> <span class="tlaGNC">          25 :     SM_LOG_INFO(MODULE_NAME, &quot;user '%s' created with role=%s&quot;, username, sm_role_to_str(role));</span></span>
-<span id="L697"><span class="lineNum">     697</span> <span class="tlaGNC">          25 :     sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L698"><span class="lineNum">     698</span> <span class="tlaGNC">          25 :     return st;</span></span>
-<span id="L699"><span class="lineNum">     699</span>              : }</span>
-<span id="L700"><span class="lineNum">     700</span>              : </span>
-<span id="L701"><span class="lineNum">     701</span>              : /* ---------------- self-service ---------------- */</span>
-<span id="L702"><span class="lineNum">     702</span>              : </span>
-<span id="L703"><span class="lineNum">     703</span> <span class="tlaGNC">          57 : sm_status_t auth_change_password(const char *token, const char *old_password,</span></span>
-<span id="L704"><span class="lineNum">     704</span>              :                                   const char *new_password)</span>
-<span id="L705"><span class="lineNum">     705</span>              : {</span>
-<span id="L706"><span class="lineNum">     706</span> <span class="tlaGNC">          57 :     if (token == NULL || old_password == NULL || new_password == NULL) {</span></span>
-<span id="L707"><span class="lineNum">     707</span> <span class="tlaGNC">           1 :         return SM_ERR_NULL_PARAM;</span></span>
-<span id="L708"><span class="lineNum">     708</span>              :     }</span>
-<span id="L709"><span class="lineNum">     709</span> <span class="tlaGNC">          56 :     if (strlen(new_password) &lt; 8u) {</span></span>
-<span id="L710"><span class="lineNum">     710</span> <span class="tlaGNC">           1 :         return SM_ERR_INVALID_ARG;</span></span>
+<span id="L655"><span class="lineNum">     655</span>              : /* ---------------- user management ---------------- */</span>
+<span id="L656"><span class="lineNum">     656</span>              : </span>
+<span id="L657"><span class="lineNum">     657</span> <span class="tlaGNC">         201 : static bool valid_username(const char *username)</span></span>
+<span id="L658"><span class="lineNum">     658</span>              : {</span>
+<span id="L659"><span class="lineNum">     659</span> <span class="tlaGNC">         201 :     size_t len = strlen(username);</span></span>
+<span id="L660"><span class="lineNum">     660</span> <span class="tlaGNC">         201 :     if (len == 0 || len &gt; SM_AUTH_MAX_USERNAME) return false;</span></span>
+<span id="L661"><span class="lineNum">     661</span> <span class="tlaGNC">        2166 :     for (size_t i = 0; i &lt; len; ++i) {</span></span>
+<span id="L662"><span class="lineNum">     662</span> <span class="tlaGNC">        1971 :         char c = username[i];</span></span>
+<span id="L663"><span class="lineNum">     663</span> <span class="tlaGNC">        1971 :         if (!(isalnum((unsigned char)c) || c == '_' || c == '.' || c == '-')) return false;</span></span>
+<span id="L664"><span class="lineNum">     664</span>              :     }</span>
+<span id="L665"><span class="lineNum">     665</span> <span class="tlaGNC">         195 :     return true;</span></span>
+<span id="L666"><span class="lineNum">     666</span>              : }</span>
+<span id="L667"><span class="lineNum">     667</span>              : </span>
+<span id="L668"><span class="lineNum">     668</span> <span class="tlaGNC">         215 : sm_status_t auth_create_user(const char *username, const char *password, sm_role_t role)</span></span>
+<span id="L669"><span class="lineNum">     669</span>              : {</span>
+<span id="L670"><span class="lineNum">     670</span> <span class="tlaGNC">         215 :     if (username == NULL || password == NULL) return SM_ERR_NULL_PARAM;</span></span>
+<span id="L671"><span class="lineNum">     671</span> <span class="tlaGNC">         202 :     if (!valid_username(username) || strlen(password) &lt; 8u || role == SM_ROLE_UNKNOWN) {</span></span>
+<span id="L672"><span class="lineNum">     672</span> <span class="tlaGNC">          21 :         return SM_ERR_INVALID_ARG;</span></span>
+<span id="L673"><span class="lineNum">     673</span>              :     }</span>
+<span id="L674"><span class="lineNum">     674</span>              : </span>
+<span id="L675"><span class="lineNum">     675</span> <span class="tlaGNC">         181 :     sm_mutex_lock(&amp;g_auth_lock);</span></span>
+<span id="L676"><span class="lineNum">     676</span> <span class="tlaGNC">         182 :     if (find_user_locked(username) != NULL) {</span></span>
+<span id="L677"><span class="lineNum">     677</span> <span class="tlaGNC">           7 :         sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L678"><span class="lineNum">     678</span> <span class="tlaGNC">           7 :         return SM_ERR_DUPLICATE;</span></span>
+<span id="L679"><span class="lineNum">     679</span>              :     }</span>
+<span id="L680"><span class="lineNum">     680</span> <span class="tlaGNC">         175 :     if (g_user_count &gt;= SM_AUTH_MAX_USERS) {</span></span>
+<span id="L681"><span class="lineNum">     681</span> <span class="tlaUNC">           0 :         sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L682"><span class="lineNum">     682</span> <span class="tlaUNC">           0 :         return SM_ERR_CAPACITY;</span></span>
+<span id="L683"><span class="lineNum">     683</span>              :     }</span>
+<span id="L684"><span class="lineNum">     684</span>              : </span>
+<span id="L685"><span class="lineNum">     685</span> <span class="tlaGNC">         175 :     sm_user_record_t *u = &amp;g_users[g_user_count];</span></span>
+<span id="L686"><span class="lineNum">     686</span> <span class="tlaGNC">         175 :     memset(u, 0, sizeof(*u));</span></span>
+<span id="L687"><span class="lineNum">     687</span> <span class="tlaGNC">         175 :     strncpy(u-&gt;username, username, sizeof(u-&gt;username) - 1u);</span></span>
+<span id="L688"><span class="lineNum">     688</span> <span class="tlaGNC">         175 :     u-&gt;username[sizeof(u-&gt;username) - 1u] = '\0';</span></span>
+<span id="L689"><span class="lineNum">     689</span> <span class="tlaGNC">         175 :     if (fill_random(u-&gt;salt, SM_AUTH_SALT_BYTES) != 0) {</span></span>
+<span id="L690"><span class="lineNum">     690</span> <span class="tlaUNC">           0 :         sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L691"><span class="lineNum">     691</span> <span class="tlaUNC">           0 :         return SM_ERR_INTERNAL;</span></span>
+<span id="L692"><span class="lineNum">     692</span>              :     }</span>
+<span id="L693"><span class="lineNum">     693</span> <span class="tlaGNC">         175 :     hash_password(u-&gt;salt, password, u-&gt;hash);</span></span>
+<span id="L694"><span class="lineNum">     694</span> <span class="tlaGNC">         175 :     u-&gt;role = role;</span></span>
+<span id="L695"><span class="lineNum">     695</span> <span class="tlaGNC">         175 :     u-&gt;in_use = true;</span></span>
+<span id="L696"><span class="lineNum">     696</span> <span class="tlaGNC">         175 :     g_user_count++;</span></span>
+<span id="L697"><span class="lineNum">     697</span>              : </span>
+<span id="L698"><span class="lineNum">     698</span> <span class="tlaGNC">         175 :     sm_status_t st = save_users_locked(g_users_path);</span></span>
+<span id="L699"><span class="lineNum">     699</span> <span class="tlaGNC">         175 :     SM_LOG_INFO(MODULE_NAME, &quot;user '%s' created with role=%s&quot;, username, sm_role_to_str(role));</span></span>
+<span id="L700"><span class="lineNum">     700</span> <span class="tlaGNC">         175 :     sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L701"><span class="lineNum">     701</span> <span class="tlaGNC">         175 :     return st;</span></span>
+<span id="L702"><span class="lineNum">     702</span>              : }</span>
+<span id="L703"><span class="lineNum">     703</span>              : </span>
+<span id="L704"><span class="lineNum">     704</span>              : /* ---------------- self-service ---------------- */</span>
+<span id="L705"><span class="lineNum">     705</span>              : </span>
+<span id="L706"><span class="lineNum">     706</span> <span class="tlaGNC">         399 : sm_status_t auth_change_password(const char *token, const char *old_password,</span></span>
+<span id="L707"><span class="lineNum">     707</span>              :                                   const char *new_password)</span>
+<span id="L708"><span class="lineNum">     708</span>              : {</span>
+<span id="L709"><span class="lineNum">     709</span> <span class="tlaGNC">         399 :     if (token == NULL || old_password == NULL || new_password == NULL) {</span></span>
+<span id="L710"><span class="lineNum">     710</span> <span class="tlaGNC">           7 :         return SM_ERR_NULL_PARAM;</span></span>
 <span id="L711"><span class="lineNum">     711</span>              :     }</span>
-<span id="L712"><span class="lineNum">     712</span>              : </span>
-<span id="L713"><span class="lineNum">     713</span>              :     sm_auth_user_t caller;</span>
-<span id="L714"><span class="lineNum">     714</span> <span class="tlaGNC">          55 :     const sm_status_t st = auth_verify_session(token, &amp;caller);</span></span>
-<span id="L715"><span class="lineNum">     715</span> <span class="tlaGNC">          55 :     if (st != SM_OK) {</span></span>
-<span id="L716"><span class="lineNum">     716</span> <span class="tlaGNC">           1 :         return st;</span></span>
-<span id="L717"><span class="lineNum">     717</span>              :     }</span>
-<span id="L718"><span class="lineNum">     718</span>              : </span>
-<span id="L719"><span class="lineNum">     719</span> <span class="tlaGNC">          54 :     if (sm_mutex_lock(&amp;g_auth_lock) != 0) {</span></span>
-<span id="L720"><span class="lineNum">     720</span> <span class="tlaUNC">           0 :         return SM_ERR_LOCK_FAILED;</span></span>
-<span id="L721"><span class="lineNum">     721</span>              :     }</span>
-<span id="L722"><span class="lineNum">     722</span>              : </span>
-<span id="L723"><span class="lineNum">     723</span> <span class="tlaGNC">          54 :     sm_user_record_t *u = find_user_locked(caller.username);</span></span>
-<span id="L724"><span class="lineNum">     724</span> <span class="tlaGNC">          54 :     if (u == NULL) {</span></span>
-<span id="L725"><span class="lineNum">     725</span> <span class="tlaGNC">           1 :         (void)sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L726"><span class="lineNum">     726</span> <span class="tlaGNC">           1 :         return SM_ERR_NOT_FOUND;</span></span>
-<span id="L727"><span class="lineNum">     727</span>              :     }</span>
-<span id="L728"><span class="lineNum">     728</span>              : </span>
-<span id="L729"><span class="lineNum">     729</span>              :     uint8_t computed[SM_SHA256_DIGEST_SIZE];</span>
-<span id="L730"><span class="lineNum">     730</span> <span class="tlaGNC">          53 :     hash_password(u-&gt;salt, old_password, computed);</span></span>
-<span id="L731"><span class="lineNum">     731</span> <span class="tlaGNC">          53 :     if (!consttime_eq(computed, u-&gt;hash, SM_SHA256_DIGEST_SIZE)) {</span></span>
-<span id="L732"><span class="lineNum">     732</span> <span class="tlaGNC">           1 :         (void)sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L733"><span class="lineNum">     733</span> <span class="tlaGNC">           1 :         SM_LOG_WARN(MODULE_NAME, &quot;password change for '%s' rejected: wrong current password&quot;,</span></span>
-<span id="L734"><span class="lineNum">     734</span>              :                     caller.username);</span>
-<span id="L735"><span class="lineNum">     735</span> <span class="tlaGNC">           1 :         return SM_ERR_UNAUTHORIZED;</span></span>
-<span id="L736"><span class="lineNum">     736</span>              :     }</span>
-<span id="L737"><span class="lineNum">     737</span>              : </span>
-<span id="L738"><span class="lineNum">     738</span> <span class="tlaGNC">          52 :     if (fill_random(u-&gt;salt, SM_AUTH_SALT_BYTES) != 0) {</span></span>
-<span id="L739"><span class="lineNum">     739</span> <span class="tlaUNC">           0 :         (void)sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L740"><span class="lineNum">     740</span> <span class="tlaUNC">           0 :         return SM_ERR_INTERNAL;</span></span>
-<span id="L741"><span class="lineNum">     741</span>              :     }</span>
-<span id="L742"><span class="lineNum">     742</span> <span class="tlaGNC">          52 :     hash_password(u-&gt;salt, new_password, u-&gt;hash);</span></span>
-<span id="L743"><span class="lineNum">     743</span>              : </span>
-<span id="L744"><span class="lineNum">     744</span>              :     /* g_users[] already holds the authoritative new state; persist it.</span>
-<span id="L745"><span class="lineNum">     745</span>              :      * A reload-from-disk immediately after save was previously done here</span>
-<span id="L746"><span class="lineNum">     746</span>              :      * too, which doubled the file rename/replace work (and thus the</span>
-<span id="L747"><span class="lineNum">     747</span>              :      * Windows sharing-violation exposure noted above) on every single</span>
-<span id="L748"><span class="lineNum">     748</span>              :      * password change while holding g_auth_lock -- pure overhead with no</span>
-<span id="L749"><span class="lineNum">     749</span>              :      * effect on correctness, since save already reflects the in-memory</span>
-<span id="L750"><span class="lineNum">     750</span>              :      * state exactly. Removed. */</span>
-<span id="L751"><span class="lineNum">     751</span> <span class="tlaGNC">          52 :     sm_status_t save_st = save_users_locked(g_users_path);</span></span>
-<span id="L752"><span class="lineNum">     752</span>              : </span>
-<span id="L753"><span class="lineNum">     753</span> <span class="tlaGNC">          52 :     SM_LOG_INFO(MODULE_NAME, &quot;user '%s' changed their password&quot;, caller.username);</span></span>
-<span id="L754"><span class="lineNum">     754</span> <span class="tlaGNC">          52 :     (void)sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L755"><span class="lineNum">     755</span> <span class="tlaGNC">          52 :     return save_st;</span></span>
-<span id="L756"><span class="lineNum">     756</span>              : }</span>
-<span id="L757"><span class="lineNum">     757</span>              : </span>
-<span id="L758"><span class="lineNum">     758</span>              : /* ---------------- user management ---------------- */</span>
-<span id="L759"><span class="lineNum">     759</span>              : </span>
-<span id="L760"><span class="lineNum">     760</span> <span class="tlaGNC">           4 : sm_status_t auth_delete_user(const char *username)</span></span>
-<span id="L761"><span class="lineNum">     761</span>              : {</span>
-<span id="L762"><span class="lineNum">     762</span> <span class="tlaGNC">           4 :     if (username == NULL) return SM_ERR_NULL_PARAM;</span></span>
-<span id="L763"><span class="lineNum">     763</span> <span class="tlaGNC">           3 :     sm_mutex_lock(&amp;g_auth_lock);</span></span>
-<span id="L764"><span class="lineNum">     764</span> <span class="tlaGNC">           3 :     sm_user_record_t *u = find_user_locked(username);</span></span>
-<span id="L765"><span class="lineNum">     765</span> <span class="tlaGNC">           3 :     if (u == NULL) {</span></span>
-<span id="L766"><span class="lineNum">     766</span> <span class="tlaGNC">           1 :         sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L767"><span class="lineNum">     767</span> <span class="tlaGNC">           1 :         return SM_ERR_NOT_FOUND;</span></span>
-<span id="L768"><span class="lineNum">     768</span>              :     }</span>
-<span id="L769"><span class="lineNum">     769</span> <span class="tlaGNC">           2 :     u-&gt;in_use = false;</span></span>
-<span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC">           2 :     sm_status_t st = save_users_locked(g_users_path);</span></span>
-<span id="L771"><span class="lineNum">     771</span> <span class="tlaGNC">           2 :     SM_LOG_INFO(MODULE_NAME, &quot;user '%s' deleted&quot;, username);</span></span>
-<span id="L772"><span class="lineNum">     772</span> <span class="tlaGNC">           2 :     sm_mutex_unlock(&amp;g_auth_lock);</span></span>
-<span id="L773"><span class="lineNum">     773</span> <span class="tlaGNC">           2 :     return st;</span></span>
-<span id="L774"><span class="lineNum">     774</span>              : }</span>
+<span id="L712"><span class="lineNum">     712</span> <span class="tlaGNC">         392 :     if (strlen(new_password) &lt; 8u) {</span></span>
+<span id="L713"><span class="lineNum">     713</span> <span class="tlaGNC">           7 :         return SM_ERR_INVALID_ARG;</span></span>
+<span id="L714"><span class="lineNum">     714</span>              :     }</span>
+<span id="L715"><span class="lineNum">     715</span>              : </span>
+<span id="L716"><span class="lineNum">     716</span>              :     sm_auth_user_t caller;</span>
+<span id="L717"><span class="lineNum">     717</span> <span class="tlaGNC">         385 :     const sm_status_t st = auth_verify_session(token, &amp;caller);</span></span>
+<span id="L718"><span class="lineNum">     718</span> <span class="tlaGNC">         385 :     if (st != SM_OK) {</span></span>
+<span id="L719"><span class="lineNum">     719</span> <span class="tlaGNC">           7 :         return st;</span></span>
+<span id="L720"><span class="lineNum">     720</span>              :     }</span>
+<span id="L721"><span class="lineNum">     721</span>              : </span>
+<span id="L722"><span class="lineNum">     722</span> <span class="tlaGNC">         378 :     if (sm_mutex_lock(&amp;g_auth_lock) != 0) {</span></span>
+<span id="L723"><span class="lineNum">     723</span> <span class="tlaUNC">           0 :         return SM_ERR_LOCK_FAILED;</span></span>
+<span id="L724"><span class="lineNum">     724</span>              :     }</span>
+<span id="L725"><span class="lineNum">     725</span>              : </span>
+<span id="L726"><span class="lineNum">     726</span> <span class="tlaGNC">         378 :     sm_user_record_t *u = find_user_locked(caller.username);</span></span>
+<span id="L727"><span class="lineNum">     727</span> <span class="tlaGNC">         378 :     if (u == NULL) {</span></span>
+<span id="L728"><span class="lineNum">     728</span> <span class="tlaGNC">           7 :         (void)sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L729"><span class="lineNum">     729</span> <span class="tlaGNC">           7 :         return SM_ERR_NOT_FOUND;</span></span>
+<span id="L730"><span class="lineNum">     730</span>              :     }</span>
+<span id="L731"><span class="lineNum">     731</span>              : </span>
+<span id="L732"><span class="lineNum">     732</span>              :     uint8_t computed[SM_SHA256_DIGEST_SIZE];</span>
+<span id="L733"><span class="lineNum">     733</span> <span class="tlaGNC">         371 :     hash_password(u-&gt;salt, old_password, computed);</span></span>
+<span id="L734"><span class="lineNum">     734</span> <span class="tlaGNC">         371 :     if (!consttime_eq(computed, u-&gt;hash, SM_SHA256_DIGEST_SIZE)) {</span></span>
+<span id="L735"><span class="lineNum">     735</span> <span class="tlaGNC">           7 :         (void)sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L736"><span class="lineNum">     736</span> <span class="tlaGNC">           7 :         SM_LOG_WARN(MODULE_NAME, &quot;password change for '%s' rejected: wrong current password&quot;,</span></span>
+<span id="L737"><span class="lineNum">     737</span>              :                     caller.username);</span>
+<span id="L738"><span class="lineNum">     738</span> <span class="tlaGNC">           7 :         return SM_ERR_UNAUTHORIZED;</span></span>
+<span id="L739"><span class="lineNum">     739</span>              :     }</span>
+<span id="L740"><span class="lineNum">     740</span>              : </span>
+<span id="L741"><span class="lineNum">     741</span> <span class="tlaGNC">         364 :     if (fill_random(u-&gt;salt, SM_AUTH_SALT_BYTES) != 0) {</span></span>
+<span id="L742"><span class="lineNum">     742</span> <span class="tlaUNC">           0 :         (void)sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L743"><span class="lineNum">     743</span> <span class="tlaUNC">           0 :         return SM_ERR_INTERNAL;</span></span>
+<span id="L744"><span class="lineNum">     744</span>              :     }</span>
+<span id="L745"><span class="lineNum">     745</span> <span class="tlaGNC">         364 :     hash_password(u-&gt;salt, new_password, u-&gt;hash);</span></span>
+<span id="L746"><span class="lineNum">     746</span>              : </span>
+<span id="L747"><span class="lineNum">     747</span>              :     /* g_users[] already holds the authoritative new state; persist it.</span>
+<span id="L748"><span class="lineNum">     748</span>              :      * A reload-from-disk immediately after save was previously done here</span>
+<span id="L749"><span class="lineNum">     749</span>              :      * too, which doubled the file rename/replace work (and thus the</span>
+<span id="L750"><span class="lineNum">     750</span>              :      * Windows sharing-violation exposure noted above) on every single</span>
+<span id="L751"><span class="lineNum">     751</span>              :      * password change while holding g_auth_lock -- pure overhead with no</span>
+<span id="L752"><span class="lineNum">     752</span>              :      * effect on correctness, since save already reflects the in-memory</span>
+<span id="L753"><span class="lineNum">     753</span>              :      * state exactly. Removed. */</span>
+<span id="L754"><span class="lineNum">     754</span> <span class="tlaGNC">         364 :     sm_status_t save_st = save_users_locked(g_users_path);</span></span>
+<span id="L755"><span class="lineNum">     755</span>              : </span>
+<span id="L756"><span class="lineNum">     756</span> <span class="tlaGNC">         364 :     SM_LOG_INFO(MODULE_NAME, &quot;user '%s' changed their password&quot;, caller.username);</span></span>
+<span id="L757"><span class="lineNum">     757</span> <span class="tlaGNC">         364 :     (void)sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L758"><span class="lineNum">     758</span> <span class="tlaGNC">         364 :     return save_st;</span></span>
+<span id="L759"><span class="lineNum">     759</span>              : }</span>
+<span id="L760"><span class="lineNum">     760</span>              : </span>
+<span id="L761"><span class="lineNum">     761</span>              : /* ---------------- user management ---------------- */</span>
+<span id="L762"><span class="lineNum">     762</span>              : </span>
+<span id="L763"><span class="lineNum">     763</span> <span class="tlaGNC">          28 : sm_status_t auth_delete_user(const char *username)</span></span>
+<span id="L764"><span class="lineNum">     764</span>              : {</span>
+<span id="L765"><span class="lineNum">     765</span> <span class="tlaGNC">          28 :     if (username == NULL) return SM_ERR_NULL_PARAM;</span></span>
+<span id="L766"><span class="lineNum">     766</span> <span class="tlaGNC">          21 :     sm_mutex_lock(&amp;g_auth_lock);</span></span>
+<span id="L767"><span class="lineNum">     767</span> <span class="tlaGNC">          21 :     sm_user_record_t *u = find_user_locked(username);</span></span>
+<span id="L768"><span class="lineNum">     768</span> <span class="tlaGNC">          21 :     if (u == NULL) {</span></span>
+<span id="L769"><span class="lineNum">     769</span> <span class="tlaGNC">           7 :         sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC">           7 :         return SM_ERR_NOT_FOUND;</span></span>
+<span id="L771"><span class="lineNum">     771</span>              :     }</span>
+<span id="L772"><span class="lineNum">     772</span> <span class="tlaGNC">          14 :     u-&gt;in_use = false;</span></span>
+<span id="L773"><span class="lineNum">     773</span> <span class="tlaGNC">          14 :     sm_status_t st = save_users_locked(g_users_path);</span></span>
+<span id="L774"><span class="lineNum">     774</span> <span class="tlaGNC">          14 :     SM_LOG_INFO(MODULE_NAME, &quot;user '%s' deleted&quot;, username);</span></span>
+<span id="L775"><span class="lineNum">     775</span> <span class="tlaGNC">          14 :     sm_mutex_unlock(&amp;g_auth_lock);</span></span>
+<span id="L776"><span class="lineNum">     776</span> <span class="tlaGNC">          14 :     return st;</span></span>
+<span id="L777"><span class="lineNum">     777</span>              : }</span>
         </pre>
               </td>
             </tr>

@@ -386,7 +386,8 @@ static sm_status_t seed_default_users_locked(void)
 
         sm_user_record_t *u = &g_users[g_user_count];
         memset(u, 0, sizeof(*u));
-        strncpy(u->username, seeds[i].user, SM_AUTH_MAX_USERNAME);
+        strncpy(u->username, seeds[i].user, sizeof(u->username) - 1u);
+        u->username[sizeof(u->username) - 1u] = '\0';
         if (fill_random(u->salt, SM_AUTH_SALT_BYTES) != 0) return SM_ERR_INTERNAL;
         hash_password(u->salt, password, u->hash);
         u->role = seeds[i].role;
@@ -522,7 +523,8 @@ sm_status_t auth_login(const char *username, const char *password, sm_session_t 
 
     slot->in_use = true;
     sm_hex_encode(token_bytes, SM_AUTH_TOKEN_BYTES, slot->session.token);
-    strncpy(slot->session.user.username, u->username, SM_AUTH_MAX_USERNAME);
+    strncpy(slot->session.user.username, u->username, sizeof(slot->session.user.username) - 1u);
+    slot->session.user.username[sizeof(slot->session.user.username) - 1u] = '\0';
     slot->session.user.role = u->role;
     slot->session.expires_at = now + (time_t)SM_AUTH_SESSION_SECONDS;
 
@@ -682,7 +684,8 @@ sm_status_t auth_create_user(const char *username, const char *password, sm_role
 
     sm_user_record_t *u = &g_users[g_user_count];
     memset(u, 0, sizeof(*u));
-    strncpy(u->username, username, SM_AUTH_MAX_USERNAME);
+    strncpy(u->username, username, sizeof(u->username) - 1u);
+    u->username[sizeof(u->username) - 1u] = '\0';
     if (fill_random(u->salt, SM_AUTH_SALT_BYTES) != 0) {
         sm_mutex_unlock(&g_auth_lock);
         return SM_ERR_INTERNAL;

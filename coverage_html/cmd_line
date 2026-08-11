@@ -1,1 +1,1 @@
-genhtml coverage.info --output-directory coverage_html --rc branch_coverage=1 --ignore-errors negative
+genhtml --quiet coverage.info --output-directory coverage_html --ignore-errors source,graph,negative,negative,deprecated,deprecated,unused,unused

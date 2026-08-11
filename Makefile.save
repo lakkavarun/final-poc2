@@ -1,4 +1,4 @@
-# =============================================================================
+lcov --capture# =============================================================================
 # Makefile - Telecom Subscriber Management System
 # =============================================================================
 # Written to spec: does not modify any .c/.h source, does not change the
@@ -34,7 +34,6 @@ TEST_TARGET    = run_tests
 THREAD_DEMO_TARGET = thread_demo
 
 COVERAGE_TARGET = run_tests_coverage
-COVERAGE_FLAGS = --coverage
 COVERAGE_INFO   = coverage.info
 COVERAGE_HTML   = coverage_html
 
@@ -196,23 +195,30 @@ $(CUNIT_STUB_TARGET): tests/test_cunit.c $(CORE_SRCS) $(CUNIT_STUB_DIR)/cunit_st
 #     if missing, install it (e.g. `apt install lcov`) -- not done here,
 #     per the "does not install anything" rule at the top of this file.
 # =============================================================================
+COVERAGE_FLAGS = --coverage
+
 coverage: $(COVERAGE_TARGET)
 	./$(COVERAGE_TARGET)
-	@lcov --quiet --capture --directory . --output-file $(COVERAGE_INFO) --ignore-errors gcov,source,graph,negative,negative,deprecated,deprecated,unused,unused >/dev/null 2>&1 || \
-		lcov --quiet --capture --directory . --output-file $(COVERAGE_INFO) --ignore-errors gcov,source,graph,negative,negative,deprecated,unused >/dev/null 2>&1 || \
-		lcov --quiet --capture --directory . --output-file $(COVERAGE_INFO) --ignore-errors gcov >/dev/null 2>&1
-	@lcov --quiet --remove $(COVERAGE_INFO) 'tests/*' --output-file $(COVERAGE_INFO) --ignore-errors gcov,source,graph,negative,negative,deprecated,deprecated,unused,unused >/dev/null 2>&1 || \
-		lcov --quiet --remove $(COVERAGE_INFO) 'tests/*' --output-file $(COVERAGE_INFO) --ignore-errors gcov,source,graph,negative,negative,deprecated,unused >/dev/null 2>&1 || \
-		lcov --quiet --remove $(COVERAGE_INFO) 'tests/*' --output-file $(COVERAGE_INFO) --ignore-errors gcov >/dev/null 2>&1
-	@genhtml --quiet $(COVERAGE_INFO) --output-directory $(COVERAGE_HTML) --ignore-errors source,graph,negative,negative,deprecated,deprecated,unused,unused >/dev/null 2>&1 || \
-		genhtml --quiet $(COVERAGE_INFO) --output-directory $(COVERAGE_HTML) --ignore-errors source,graph,negative,negative,deprecated,unused >/dev/null 2>&1 || \
-		genhtml --quiet $(COVERAGE_INFO) --output-directory $(COVERAGE_HTML) >/dev/null 2>&1
-	@lcov --summary $(COVERAGE_INFO) 2>/dev/null | grep -v "branches" || true
+	lcov --capture --directory . --output-file $(COVERAGE_INFO) \
+		--rc lcov_branch_coverage=1
+	lcov --remove $(COVERAGE_INFO) '/usr/*' 'tests/*' '$(CUNIT_STUB_DIR)/*' \
+		--output-file $(COVERAGE_INFO) --rc lcov_branch_coverage=1
+	genhtml $(COVERAGE_INFO) --output-directory $(COVERAGE_HTML) \
+		--rc lcov_branch_coverage=1
 	@echo "Coverage HTML report: $(COVERAGE_HTML)/index.html"
 
 $(COVERAGE_TARGET): tests/test_main.c $(CORE_SRCS)
-	$(CC) $(CSTD) $(WARN) $(INC) $(COVERAGE_FLAGS) tests/test_main.c $(CORE_SRCS) -o $(COVERAGE_TARGET) $(LDLIBS)
+	$(CC) $(CSTD) $(WARN) $(INC) $(COVERAGE_FLAGS) \
+		tests/test_main.c $(CORE_SRCS) -o $(COVERAGE_TARGET) $(LDLIBS)
 
+# =============================================================================
+# 7. MISRA C:2012 (Cppcheck MISRA addon only)
+#    --suppress=misra-config silences cppcheck's own "missing configuration"
+#    notices (e.g. for EEXIST, EINTR, ENOENT, ERROR_SHARING_VIOLATION) --
+#    these are cppcheck telling you it can't fully resolve certain system
+#    header macros without a full library config, not actual MISRA rule
+#    violations. Real MISRA findings (misra-c2012-*) still print normally.
+# =============================================================================
 misra:
 	cppcheck --addon=misra --std=c11 --force -Iinclude --suppress=misra-config src 2>&1 | tee $(MISRA_REPORT)
 
