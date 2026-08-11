@@ -1,0 +1,14 @@
+2026-08-07 [ERROR] test failure sample
+2026-08-11 00:38:31 [INFO ] [tid=0] [SHAREDSTR::sstr_pool_init:30] shared string pool initialized (hint=1024)
+2026-08-11 00:38:31 [INFO ] [tid=0] [MAIN::main:645] === Telecom Subscriber Management System starting ===
+2026-08-11 00:38:31 [INFO ] [tid=0] [AUTH::auth_init:422] no credential store found, bootstrapping default accounts
+2026-08-11 00:38:32 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-08-11 00:38:32 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-08-11 00:38:32 [INFO ] [tid=0] [MEMPOOL::mempool_create:67] pool created block_size=88 blocks_per_slab=256
+2026-08-11 00:38:32 [INFO ] [tid=0] [SUBSCRIBER::subdb_create:153] subscriber database created
+2026-08-11 00:38:32 [ERROR] [tid=0] [SUBSCRIBER::subdb_load_csv:903] load_csv: cannot open 'data/subscribers.csv': No such file or directory
+2026-08-11 00:38:32 [INFO ] [tid=0] [SUBSCRIBER::subdb_save_csv:892] saved 0 subscriber(s) to 'data/subscribers.csv'
+2026-08-11 00:38:32 [INFO ] [tid=0] [SUBSCRIBER::subdb_destroy:204] subscriber database destroyed
+2026-08-11 00:38:33 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-08-11 00:38:33 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-08-11 00:38:33 [INFO ] [tid=0] [MAIN::main:678] === Telecom Subscriber Management System shutting down ===

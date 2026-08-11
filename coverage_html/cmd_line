@@ -1,0 +1,1 @@
+genhtml coverage.info --output-directory coverage_html --rc branch_coverage=1 --ignore-errors negative
