@@ -1,0 +1,148 @@
+2026-08-11 00:38:31 [INFO ] [tid=0] [SHAREDSTR::sstr_pool_init:30] shared string pool initialized (hint=1024)
+2026-08-11 00:38:31 [INFO ] [tid=0] [MAIN::main:645] === Telecom Subscriber Management System starting ===
+2026-08-11 00:38:31 [INFO ] [tid=0] [AUTH::auth_init:422] no credential store found, bootstrapping default accounts
+2026-08-11 00:38:32 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-08-11 00:38:32 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-08-11 00:38:32 [INFO ] [tid=0] [MEMPOOL::mempool_create:67] pool created block_size=88 blocks_per_slab=256
+2026-08-11 00:38:32 [INFO ] [tid=0] [SUBSCRIBER::subdb_create:153] subscriber database created
+2026-08-11 00:38:32 [INFO ] [tid=0] [SUBSCRIBER::subdb_save_csv:892] saved 0 subscriber(s) to 'data/subscribers.csv'
+2026-08-11 00:38:32 [INFO ] [tid=0] [SUBSCRIBER::subdb_destroy:204] subscriber database destroyed
+2026-08-11 00:38:33 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-08-11 00:38:33 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-08-11 00:38:33 [INFO ] [tid=0] [MAIN::main:678] === Telecom Subscriber Management System shutting down ===
+2026-08-11 13:51:22 [INFO ] [tid=0] [SHAREDSTR::sstr_pool_init:30] shared string pool initialized (hint=1024)
+2026-08-11 13:51:22 [INFO ] [tid=0] [MAIN::main:645] === Telecom Subscriber Management System starting ===
+2026-08-11 13:51:22 [INFO ] [tid=0] [MEMPOOL::mempool_create:67] pool created block_size=88 blocks_per_slab=256
+2026-08-11 13:51:22 [INFO ] [tid=0] [SUBSCRIBER::subdb_create:153] subscriber database created
+2026-08-11 13:51:22 [INFO ] [tid=0] [SUBSCRIBER::subdb_load_csv:958] load_csv: loaded=0 skipped=0 from 'data/subscribers.csv'
+2026-08-11 13:51:29 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-08-11 13:51:29 [INFO ] [tid=0] [AUTH::auth_login:536] user 'admin' (role=ADMIN) logged in
+2026-08-11 13:51:42 [INFO ] [tid=0] [SUBSCRIBER::subdb_save_csv:892] saved 0 subscriber(s) to 'data/backups/subscribers_20260811_192142.csv'
+2026-08-11 13:51:42 [INFO ] [tid=0] [MAIN::action_backup:419] user 'admin' triggered a backup (status=OK)
+2026-08-11 13:52:18 [INFO ] [tid=0] [SUBSCRIBER::subdb_add:347] subscriber added id=1
+2026-08-11 13:52:18 [INFO ] [tid=0] [MAIN::action_add:258] user 'admin' added subscriber (status=OK)
+2026-08-11 13:52:25 [INFO ] [tid=0] [SUBSCRIBER::subdb_save_csv:892] saved 1 subscriber(s) to 'data/backups/subscribers_20260811_192225.csv'
+2026-08-11 13:52:25 [INFO ] [tid=0] [MAIN::action_backup:419] user 'admin' triggered a backup (status=OK)
+2026-08-11 13:57:57 [INFO ] [tid=0] [AUTH::auth_logout:548] user 'admin' logged out
+2026-08-11 13:57:57 [INFO ] [tid=0] [SUBSCRIBER::subdb_save_csv:892] saved 1 subscriber(s) to 'data/subscribers.csv'
+2026-08-11 13:57:57 [INFO ] [tid=0] [SUBSCRIBER::subdb_destroy:204] subscriber database destroyed
+2026-08-11 13:57:57 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-08-11 13:57:57 [INFO ] [tid=0] [MAIN::main:678] === Telecom Subscriber Management System shutting down ===
+2026-08-11 15:36:18 [INFO ] [tid=0] [SHAREDSTR::sstr_pool_init:30] shared string pool initialized (hint=1024)
+2026-08-11 15:36:18 [INFO ] [tid=0] [MAIN::main:645] === Telecom Subscriber Management System starting ===
+2026-08-11 15:36:18 [INFO ] [tid=0] [MEMPOOL::mempool_create:67] pool created block_size=88 blocks_per_slab=256
+2026-08-11 15:36:18 [INFO ] [tid=0] [SUBSCRIBER::subdb_create:153] subscriber database created
+2026-08-11 15:36:18 [INFO ] [tid=0] [SUBSCRIBER::subdb_add:347] subscriber added id=1
+2026-08-11 15:36:18 [INFO ] [tid=0] [SUBSCRIBER::subdb_load_csv:958] load_csv: loaded=1 skipped=0 from 'data/subscribers.csv'
+2026-08-11 15:36:36 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-08-11 15:36:36 [INFO ] [tid=0] [AUTH::auth_login:536] user 'admin' (role=ADMIN) logged in
+2026-08-11 15:36:45 [INFO ] [tid=0] [SUBSCRIBER::subdb_save_csv:892] saved 1 subscriber(s) to 'data/backups/subscribers_20260811_210645.csv'
+2026-08-11 15:36:45 [INFO ] [tid=0] [MAIN::action_backup:419] user 'admin' triggered a backup (status=OK)
+2026-08-11 15:36:51 [INFO ] [tid=0] [AUTH::auth_logout:548] user 'admin' logged out
+2026-08-11 15:36:51 [INFO ] [tid=0] [SUBSCRIBER::subdb_save_csv:892] saved 1 subscriber(s) to 'data/subscribers.csv'
+2026-08-11 15:36:51 [INFO ] [tid=0] [SUBSCRIBER::subdb_destroy:204] subscriber database destroyed
+2026-08-11 15:36:51 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-08-11 15:36:51 [INFO ] [tid=0] [MAIN::main:678] === Telecom Subscriber Management System shutting down ===
+2026-08-11 15:37:52 [INFO ] [tid=0] [SHAREDSTR::sstr_pool_init:30] shared string pool initialized (hint=1024)
+2026-08-11 15:37:52 [INFO ] [tid=0] [MAIN::main:645] === Telecom Subscriber Management System starting ===
+2026-08-11 15:37:52 [INFO ] [tid=0] [MEMPOOL::mempool_create:67] pool created block_size=88 blocks_per_slab=256
+2026-08-11 15:37:52 [INFO ] [tid=0] [SUBSCRIBER::subdb_create:153] subscriber database created
+2026-08-11 15:37:52 [INFO ] [tid=0] [SUBSCRIBER::subdb_add:347] subscriber added id=1
+2026-08-11 15:37:52 [INFO ] [tid=0] [SUBSCRIBER::subdb_load_csv:958] load_csv: loaded=1 skipped=0 from 'data/subscribers.csv'
+2026-08-11 15:37:59 [INFO ] [tid=0] [SUBSCRIBER::subdb_save_csv:892] saved 1 subscriber(s) to 'data/subscribers.csv'
+2026-08-11 15:37:59 [INFO ] [tid=0] [SUBSCRIBER::subdb_destroy:204] subscriber database destroyed
+2026-08-11 15:37:59 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-08-11 15:37:59 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-08-11 15:37:59 [INFO ] [tid=0] [MAIN::main:678] === Telecom Subscriber Management System shutting down ===
+2026-09-02 00:31:45 [INFO ] [tid=0] [SHAREDSTR::sstr_pool_init:30] shared string pool initialized (hint=1024)
+2026-09-02 00:31:45 [INFO ] [tid=0] [MAIN::main:645] === Telecom Subscriber Management System starting ===
+2026-09-02 00:31:45 [INFO ] [tid=0] [MEMPOOL::mempool_create:67] pool created block_size=88 blocks_per_slab=256
+2026-09-02 00:31:45 [INFO ] [tid=0] [SUBSCRIBER::subdb_create:153] subscriber database created
+2026-09-02 00:31:45 [INFO ] [tid=0] [SUBSCRIBER::subdb_add:347] subscriber added id=1
+2026-09-02 00:31:45 [INFO ] [tid=0] [SUBSCRIBER::subdb_load_csv:958] load_csv: loaded=1 skipped=0 from 'data/subscribers.csv'
+2026-09-02 00:31:58 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-09-02 00:31:58 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-09-02 00:31:58 [INFO ] [tid=0] [AUTH::auth_login:538] user 'admin' (role=ADMIN) logged in
+2026-09-02 00:33:04 [INFO ] [tid=0] [AUTH::auth_logout:550] user 'admin' logged out
+2026-09-02 00:33:19 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-09-02 00:33:19 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-09-02 00:33:19 [WARN ] [tid=0] [AUTH::auth_login:499] failed login for user 'operator'
+2026-09-02 00:39:12 [INFO ] [tid=0] [SHAREDSTR::sstr_pool_init:30] shared string pool initialized (hint=1024)
+2026-09-02 00:39:12 [INFO ] [tid=0] [MAIN::main:645] === Telecom Subscriber Management System starting ===
+2026-09-02 00:39:12 [INFO ] [tid=0] [MEMPOOL::mempool_create:67] pool created block_size=88 blocks_per_slab=256
+2026-09-02 00:39:12 [INFO ] [tid=0] [SUBSCRIBER::subdb_create:153] subscriber database created
+2026-09-02 00:39:12 [INFO ] [tid=0] [SUBSCRIBER::subdb_add:347] subscriber added id=1
+2026-09-02 00:39:12 [INFO ] [tid=0] [SUBSCRIBER::subdb_load_csv:958] load_csv: loaded=1 skipped=0 from 'data/subscribers.csv'
+2026-09-02 00:39:20 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-09-02 00:39:20 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-09-02 00:39:20 [INFO ] [tid=0] [AUTH::auth_login:538] user 'admin' (role=ADMIN) logged in
+2026-09-02 00:39:47 [INFO ] [tid=0] [MAIN::action_report:403] user 'admin' generated a subscriber report (total=1)
+2026-09-02 00:40:15 [INFO ] [tid=0] [AUTH::auth_logout:550] user 'admin' logged out
+2026-09-02 00:40:21 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-09-02 00:40:21 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-09-02 00:40:21 [INFO ] [tid=0] [AUTH::auth_login:538] user 'admin' (role=ADMIN) logged in
+2026-09-02 00:40:24 [INFO ] [tid=0] [AUTH::auth_logout:550] user 'admin' logged out
+2026-09-02 00:40:25 [INFO ] [tid=0] [SUBSCRIBER::subdb_save_csv:892] saved 1 subscriber(s) to 'data/subscribers.csv'
+2026-09-02 00:40:25 [INFO ] [tid=0] [SUBSCRIBER::subdb_destroy:204] subscriber database destroyed
+2026-09-02 00:40:25 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-09-02 00:40:25 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-09-02 00:40:25 [INFO ] [tid=0] [MAIN::main:678] === Telecom Subscriber Management System shutting down ===
+2026-09-02 00:40:31 [INFO ] [tid=0] [SHAREDSTR::sstr_pool_init:30] shared string pool initialized (hint=1024)
+2026-09-02 00:40:31 [INFO ] [tid=0] [MAIN::main:645] === Telecom Subscriber Management System starting ===
+2026-09-02 00:40:31 [INFO ] [tid=0] [MEMPOOL::mempool_create:67] pool created block_size=88 blocks_per_slab=256
+2026-09-02 00:40:31 [INFO ] [tid=0] [SUBSCRIBER::subdb_create:153] subscriber database created
+2026-09-02 00:40:31 [INFO ] [tid=0] [SUBSCRIBER::subdb_add:347] subscriber added id=1
+2026-09-02 00:40:31 [INFO ] [tid=0] [SUBSCRIBER::subdb_load_csv:958] load_csv: loaded=1 skipped=0 from 'data/subscribers.csv'
+2026-09-02 00:40:44 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-09-02 00:40:44 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-09-02 00:40:44 [INFO ] [tid=0] [AUTH::auth_login:538] user 'admin' (role=ADMIN) logged in
+2026-09-02 00:40:49 [INFO ] [tid=0] [AUTH::auth_logout:550] user 'admin' logged out
+2026-09-02 00:40:49 [INFO ] [tid=0] [SUBSCRIBER::subdb_save_csv:892] saved 1 subscriber(s) to 'data/subscribers.csv'
+2026-09-02 00:40:49 [INFO ] [tid=0] [SUBSCRIBER::subdb_destroy:204] subscriber database destroyed
+2026-09-02 00:40:49 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-09-02 00:40:49 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-09-02 00:40:49 [INFO ] [tid=0] [MAIN::main:678] === Telecom Subscriber Management System shutting down ===
+2026-09-02 00:43:07 [INFO ] [tid=0] [SHAREDSTR::sstr_pool_init:30] shared string pool initialized (hint=1024)
+2026-09-02 00:43:07 [INFO ] [tid=0] [MAIN::main:645] === Telecom Subscriber Management System starting ===
+2026-09-02 00:43:07 [INFO ] [tid=0] [MEMPOOL::mempool_create:67] pool created block_size=88 blocks_per_slab=256
+2026-09-02 00:43:07 [INFO ] [tid=0] [SUBSCRIBER::subdb_create:153] subscriber database created
+2026-09-02 00:43:07 [INFO ] [tid=0] [SUBSCRIBER::subdb_add:347] subscriber added id=1
+2026-09-02 00:43:07 [INFO ] [tid=0] [SUBSCRIBER::subdb_load_csv:958] load_csv: loaded=1 skipped=0 from 'data/subscribers.csv'
+2026-09-02 00:52:04 [INFO ] [tid=0] [SHAREDSTR::sstr_pool_init:30] shared string pool initialized (hint=1024)
+2026-09-02 00:52:04 [INFO ] [tid=0] [MAIN::main:645] === Telecom Subscriber Management System starting ===
+2026-09-02 00:52:04 [INFO ] [tid=0] [MEMPOOL::mempool_create:67] pool created block_size=88 blocks_per_slab=256
+2026-09-02 00:52:04 [INFO ] [tid=0] [SUBSCRIBER::subdb_create:153] subscriber database created
+2026-09-02 00:52:04 [INFO ] [tid=0] [SUBSCRIBER::subdb_add:347] subscriber added id=1
+2026-09-02 00:52:04 [INFO ] [tid=0] [SUBSCRIBER::subdb_load_csv:958] load_csv: loaded=1 skipped=0 from 'data/subscribers.csv'
+2026-09-02 00:52:07 [INFO ] [tid=0] [SUBSCRIBER::subdb_save_csv:892] saved 1 subscriber(s) to 'data/subscribers.csv'
+2026-09-02 00:52:07 [INFO ] [tid=0] [SUBSCRIBER::subdb_destroy:204] subscriber database destroyed
+2026-09-02 00:52:07 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-09-02 00:52:07 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-09-02 00:52:07 [INFO ] [tid=0] [MAIN::main:678] === Telecom Subscriber Management System shutting down ===
+2026-09-02 00:53:05 [INFO ] [tid=0] [SHAREDSTR::sstr_pool_init:30] shared string pool initialized (hint=1024)
+2026-09-02 00:53:05 [INFO ] [tid=0] [MAIN::main:645] === Telecom Subscriber Management System starting ===
+2026-09-02 00:53:05 [INFO ] [tid=0] [MEMPOOL::mempool_create:67] pool created block_size=88 blocks_per_slab=256
+2026-09-02 00:53:05 [INFO ] [tid=0] [SUBSCRIBER::subdb_create:153] subscriber database created
+2026-09-02 00:53:05 [INFO ] [tid=0] [SUBSCRIBER::subdb_add:347] subscriber added id=1
+2026-09-02 00:53:05 [INFO ] [tid=0] [SUBSCRIBER::subdb_load_csv:958] load_csv: loaded=1 skipped=0 from 'data/subscribers.csv'
+2026-09-02 00:53:13 [WARN ] [tid=0] [AUTH::auth_login:453] login attempt for unknown user 'user'
+2026-09-02 00:53:36 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-09-02 00:53:36 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-09-02 00:53:36 [INFO ] [tid=0] [AUTH::auth_login:538] user 'admin' (role=ADMIN) logged in
+2026-09-02 00:53:45 [INFO ] [tid=0] [AUTH::auth_logout:550] user 'admin' logged out
+2026-09-02 00:54:01 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-09-02 00:54:01 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-09-02 00:54:01 [INFO ] [tid=0] [AUTH::auth_login:538] user 'operator' (role=OPERATOR) logged in
+2026-09-02 00:54:11 [INFO ] [tid=0] [AUTH::auth_logout:550] user 'operator' logged out
+2026-09-02 00:54:20 [WARN ] [tid=0] [AUTH::auth_login:453] login attempt for unknown user 'user'
+2026-09-02 00:54:55 [WARN ] [tid=0] [AUTH::auth_login:453] login attempt for unknown user ''
+2026-09-02 00:55:10 [WARN ] [tid=0] [AUTH::auth_login:453] login attempt for unknown user 'user'
+2026-09-02 00:55:18 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-09-02 00:55:18 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-09-02 00:55:18 [INFO ] [tid=0] [AUTH::auth_login:538] user 'viewer' (role=VIEWER) logged in
+2026-09-02 00:55:22 [INFO ] [tid=0] [AUTH::auth_logout:550] user 'viewer' logged out
+2026-09-02 00:55:22 [INFO ] [tid=0] [SUBSCRIBER::subdb_save_csv:892] saved 1 subscriber(s) to 'data/subscribers.csv'
+2026-09-02 00:55:22 [INFO ] [tid=0] [SUBSCRIBER::subdb_destroy:204] subscriber database destroyed
+2026-09-02 00:55:22 [INFO ] [tid=0] [AUTH::save_users_locked:260] writing temp credential store 'data/users.csv.tmp'
+2026-09-02 00:55:22 [INFO ] [tid=0] [AUTH::save_users_locked:339] replacing credential store 'data/users.csv'
+2026-09-02 00:55:22 [INFO ] [tid=0] [MAIN::main:678] === Telecom Subscriber Management System shutting down ===

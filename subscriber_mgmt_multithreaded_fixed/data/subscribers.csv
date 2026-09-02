@@ -1,0 +1,2 @@
+subscriber_id,imsi,msisdn,name,region,plan,status,created_at,updated_at
+1,234567893456785,4567876543,caaaaarrrrr,india,gold,ACTIVE,1788310385,1788310385

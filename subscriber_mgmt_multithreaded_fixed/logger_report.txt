@@ -1,0 +1,1 @@
+2026-09-02 00:33:19 [WARN ] [tid=0] [AUTH::auth_login:499] failed login for user 'operator'
